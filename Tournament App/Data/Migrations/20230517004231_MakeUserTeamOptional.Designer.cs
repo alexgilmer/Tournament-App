@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tournament_App.Data;
 
@@ -11,9 +12,10 @@ using Tournament_App.Data;
 namespace Tournament_App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230517004231_MakeUserTeamOptional")]
+    partial class MakeUserTeamOptional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,7 +186,7 @@ namespace Tournament_App.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("Tournament_App.Models.ApplicationUser", b =>
@@ -271,7 +273,7 @@ namespace Tournament_App.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams", (string)null);
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("Tournament_App.Models.TeamAnswer", b =>
@@ -286,7 +288,7 @@ namespace Tournament_App.Data.Migrations
 
                     b.HasIndex("AnswerId");
 
-                    b.ToTable("TeamAnswers", (string)null);
+                    b.ToTable("TeamAnswers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

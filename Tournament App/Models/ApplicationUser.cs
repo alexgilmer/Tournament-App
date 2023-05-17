@@ -7,9 +7,9 @@ namespace Tournament_App.Models
         // Self properties
 
         // FK properties
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
 
         // Navigation properties
-        public virtual Team Team { get; set; }
+        public virtual Team? Team { get; set; }
     }
 }
