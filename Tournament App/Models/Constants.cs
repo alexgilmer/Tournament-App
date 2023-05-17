@@ -2,7 +2,7 @@
 {
     public class Constants
     {
-        public static string AdminRole = "admin";
+        public const string AdminRole = "admin";
         
     }
 }
