@@ -1,0 +1,20 @@
+﻿<h1>Create a new answer</h1>
+<form method="post" asp-controller="Answers" asp-action="Create">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="Name" name="Name" />
+        <label for="Name">Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="Description" name="Description" />
+        <label for="Description">Description</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="Code" name="Code" />
+        <label for="Code">Code</label>
+    </div>
+    <div class="mb-3">
+        <label for="PointValue">Point value</label>
+        <input type="number" step="1" class="form-control" id="PointValue" name="PointValue" />
+    </div>
+    <input type="submit" value="Submit" />
+</form>
