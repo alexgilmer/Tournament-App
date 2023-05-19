@@ -1,0 +1,29 @@
+﻿@using Tournament_App.Models.ViewModels.Admin
+@model EditUserViewModel
+
+<h1>You are currently editing the team of user: @Model.Username</h1>
+
+<form method="post" asp-controller="Admin" asp-action="EditUser">
+    <p>Current team: 
+        @if(Model.CurrentTeam == null)
+        {
+            <text>Unassigned</text>
+        }
+        else
+        {
+            <text>@Model.CurrentTeam.Name</text>
+        }
+    </p>
+    <label for="NewTeamId">
+        Assign to new team:
+        <select name="NewTeamId" id="NewTeamId">
+            @foreach(Team team in Model.TeamList)
+            {
+                <option value="@team.Id">@team.Name</option>
+            }
+            <option value="0">Unassigned</option>
+        </select>
+    </label>
+    <input type="hidden" value="@Model.ApplicationUserId" name="ApplicationUserId" />
+    <input type="submit" value="Submit"/>
+</form>

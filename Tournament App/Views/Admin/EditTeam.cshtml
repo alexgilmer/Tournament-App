@@ -1,0 +1,19 @@
+﻿@using Tournament_App.Models.ViewModels.Admin
+@model EditTeamViewModel
+
+@if(Model != null)
+{
+    <h1>You are currently editing team: @Model.Team.Name</h1>
+
+    <form method="post" asp-controller="admin" asp-action="EditTeam">
+        <input type="hidden" name="TeamId" value="@Model.Team.Id" />
+        <label>
+            New team name:
+            <input type="text" name="NewTeamName" placeholder="Team name" id="NewTeamName"/>
+        </label>
+    </form>
+}
+else
+{
+    <h1>No team selected for editing.</h1>
+}
