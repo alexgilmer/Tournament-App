@@ -36,7 +36,7 @@ namespace Tournament_App.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult LeaderBoard()
+        public IActionResult Leaderboard()
         {
             var teams = Database.Teams.Include(t => t.TeamAnswers).ThenInclude(ta => ta.Answer).ToList();
 
