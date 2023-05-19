@@ -19,24 +19,36 @@ namespace Tournament_App.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            // AsEnumerable() forces the DB to resolve the results
-            // prevents an error of translating LINQ to SQL
-            var groups = Database.ApplicationUsers
-                .Include(u => u.Team)
-                .AsEnumerable()
-                .GroupBy(u => u.Team)
-                .Select(g => new IndexViewModel.Group
+            var teams = Database.Teams.Include(t => t.TeamAnswers).ThenInclude(ta => ta.Answer).ToList();
+
+            List<IndexViewModel.Group> groups = new();
+            foreach (var team in teams)
+            {
+                IndexViewModel.Group group = new()
                 {
-                    Name = g.Key == null ? "Unassigned" : g.Key.Name,
-                    Points = g.Key == null ? 0 : g.Key.TeamAnswers.Sum(ta => ta.Answer.PointValue),
-                    Members = g.Select(m => new IndexViewModel.Member
+                    Name = team.Name,
+                    Points = team.TeamAnswers.Sum(ta => ta.Answer.PointValue),
+                    Members = Database.Users
+                    .Where(u => u.TeamId == team.Id)
+                    .Select(u => new IndexViewModel.Member
                     {
-                        Name = m.UserName,
-                        ApplicationUserId = m.Id
+                        ApplicationUserId = u.Id,
+                        Name = u.UserName
                     }).ToList()
-                })
-                .OrderByDescending(g => g.Points)
-                .ToList();
+                };
+
+                groups.Add(group);
+            }
+
+            groups.Add(new()
+            {
+                Name = "Unassigned",
+                Points = 0,
+                Members = Database.Users
+                    .Where(u => u.TeamId == null)
+                    .Select(u => new IndexViewModel.Member() { ApplicationUserId = u.Id, Name = u.UserName })
+                    .ToList()
+            });
 
             // Insert data into view model
             var vm = new IndexViewModel() { Groups = groups };
