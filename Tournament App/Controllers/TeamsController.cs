@@ -7,6 +7,7 @@ using Tournament_App.Models.ViewModels.Teams;
 
 namespace Tournament_App.Controllers
 {
+    [Authorize(Roles = Constants.AdminRole)]
     public class TeamsController : Controller
     {
         private ApplicationDbContext Database { get; }
@@ -16,44 +17,34 @@ namespace Tournament_App.Controllers
             Database = db;
         }
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
-            var teams = Database.Teams.Include(t => t.TeamAnswers).ThenInclude(ta => ta.Answer).ToList();
+            var teams = Database.Teams.ToList();
 
-            List<IndexViewModel.Group> groups = new();
-            foreach (var team in teams)
+            return View(teams);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateTeamFormModel vm)
+        {
+            if (vm.Name != null && vm.Name.Trim().Length > 0)
             {
-                IndexViewModel.Group group = new()
+                var newTeam = new Team
                 {
-                    Name = team.Name,
-                    Points = team.TeamAnswers.Sum(ta => ta.Answer.PointValue),
-                    Members = Database.Users
-                    .Where(u => u.TeamId == team.Id)
-                    .Select(u => new IndexViewModel.Member
-                    {
-                        ApplicationUserId = u.Id,
-                        Name = u.UserName
-                    }).ToList()
+                    Name = vm.Name
                 };
 
-                groups.Add(group);
+                Database.Teams.Add(newTeam);
+                Database.SaveChanges();
             }
 
-            groups.Add(new()
-            {
-                Name = "Unassigned",
-                Points = 0,
-                Members = Database.Users
-                    .Where(u => u.TeamId == null)
-                    .Select(u => new IndexViewModel.Member() { ApplicationUserId = u.Id, Name = u.UserName })
-                    .ToList()
-            });
-
-            // Insert data into view model
-            var vm = new IndexViewModel() { Groups = groups };
-
-            return View(vm);
+            return RedirectToAction("Index", "Teams");
         }
     }
 }

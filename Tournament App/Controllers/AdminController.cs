@@ -93,28 +93,5 @@ namespace Tournament_App.Controllers
 
             return RedirectToAction("Index", "Teams");
         }
-
-        [HttpGet]
-        public IActionResult CreateTeam()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult CreateTeam(CreateTeamFormModel vm)
-        {
-            if (vm.Name != null && vm.Name.Trim().Length > 0)
-            {
-                var newTeam = new Team
-                {
-                    Name = vm.Name
-                };
-
-                Database.Teams.Add(newTeam);
-                Database.SaveChanges();
-            }
-
-            return RedirectToAction("Index", "Teams");
-        }
     }
 }

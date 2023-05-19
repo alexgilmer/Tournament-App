@@ -1,6 +1,6 @@
-﻿namespace Tournament_App.Models.ViewModels.Teams
+﻿namespace Tournament_App.Models.ViewModels.Home
 {
-    public class IndexViewModel
+    public class LeaderboardViewModel
     {
         public IList<Group> Groups { get; set; }
 

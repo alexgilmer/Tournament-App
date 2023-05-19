@@ -1,35 +1,34 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@model Tournament_App.Models.ViewModels.Teams.IndexViewModel
+﻿@model IEnumerable<Team>
 
-<h1>Welcome to the Teams Index page</h1>
+<h1>Teams Index</h1>
 
-<div class="accordion">
-    @for(int i = 0; i < Model.Groups.Count; i++)
-    {
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="team-@i">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#team-collapsible-@i" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                    @Model.Groups[i].Name: &nbsp;<strong>@Model.Groups[i].Points Points</strong>
-                </button>
-            </h2>
-            <div id="team-collapsible-@i" class="accordion-collapse collapse show" aria-labelledby="team-@i">
-                <div class="accordion-body">
-                    @foreach(var member in Model.Groups[i].Members)
-                    {
-                        @if(User.IsInRole(Constants.AdminRole))
-                        {
-                            <a asp-controller="Admin" asp-action="EditUser" asp-route-userId="@member.ApplicationUserId">
-                                <span class="badge bg-info text-dark">@member.Name</span>
-                            </a>
-                        }
-                        else
-                        {
-                            <span class="badge bg-info text-dark">@member.Name</span>
-                        }
-                    }
-                </div>
-            </div>
-        </div>
-    }
-</div>
+<p>
+    <a asp-controller="Teams" asp-action="Create">Create new team</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Functions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var team in Model)
+        {
+            <tr>
+                <td>
+                    @team.Name
+                </td>
+                <td>
+                    <a asp-controller="Teams" asp-action="Edit" asp-route-id="@team.Id">Edit</a> |
+                    <a asp-controller="Teams" asp-action="Delete" asp-route-id="@team.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
