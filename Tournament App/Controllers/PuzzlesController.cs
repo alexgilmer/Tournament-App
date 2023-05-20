@@ -18,25 +18,28 @@ namespace Tournament_App.Controllers
         [Route(FirstIpChallengeRoute)]
         public IActionResult IpChallenge1()
         {
-            // yu7: "067"
+            // answer: "067"
             return View();
         }
 
         [Route(SecondIpChallengeRoute)]
         public IActionResult IpChallenge2()
         {
+            // answer: "183"
             return View();
         }
 
         [Route(ThirdIpChallengeRoute)]
         public IActionResult IpChallenge3()
         {
+            // answer: ""
             return View();
         }
 
         [Route(FourthIpChallengeRoute)]
         public IActionResult IpChallenge4()
         {
+            // answer: ""
             return View();
         }
     }
