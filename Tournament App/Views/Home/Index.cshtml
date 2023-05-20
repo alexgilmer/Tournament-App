@@ -1,8 +1,29 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container d-flex justify-content-center">
+    <a class="d-block m-3" asp-controller="Home" asp-action="Leaderboard">
+        <div class="card" style="width: 18rem;">
+            <img src="https://placekitten.com/300/200?image=2" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Go to the leaderboard</h5>
+            </div>
+        </div>
+    </a>
+
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <a class="d-block m-3" asp-area="Identity" asp-page="/Account/Register">
+            <div class="card" style="width: 18rem;">
+                <img src="https://placekitten.com/300/200?image=4" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Register to participate</h5>
+                </div>
+            </div>
+        </a>
+    }
 </div>
