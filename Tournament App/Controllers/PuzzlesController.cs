@@ -32,14 +32,14 @@ namespace Tournament_App.Controllers
         [Route(ThirdIpChallengeRoute)]
         public IActionResult IpChallenge3()
         {
-            // answer: ""
+            // answer: "230"
             return View();
         }
 
         [Route(FourthIpChallengeRoute)]
         public IActionResult IpChallenge4()
         {
-            // answer: ""
+            // answer: "119"
             return View();
         }
     }

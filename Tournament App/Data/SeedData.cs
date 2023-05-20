@@ -137,6 +137,14 @@ namespace Tournament_App.Data
                         Description = "You found the hidden instruction text",
                         Code = "FNORD",
                         PointValue = 1
+                    },
+
+                    new Answer
+                    {
+                        Name = "A Magic Phone Number",
+                        Description = "You dodged the Rickroll",
+                        Code = "8675309",
+                        PointValue = 1
                     }
                 };
 
