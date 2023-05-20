@@ -113,23 +113,34 @@ namespace Tournament_App.Data
 
             if (!database.Answers.Any())
             {
-                var instructionGood = new Answer
+                var answers = new List<Answer>
                 {
-                    Name = "Competent Reader",
-                    Description = "You read the starting instructions",
-                    Code = "lslfi8sern",
-                    PointValue = 1
+                    new Answer
+                    {
+                        Name = "Competent Reader",
+                        Description = "You read the starting instructions",
+                        Code = "lslfi8sern",
+                        PointValue = 1
+                    },
+
+                    new Answer
+                    {
+                        Name = "Spammer",
+                        Description = "You didn't read the instructions properly",
+                        Code = "k823bknciwe7w872",
+                        PointValue = -2
+                    },
+
+                    new Answer
+                    {
+                        Name = "Fjord",
+                        Description = "You found the hidden instruction text",
+                        Code = "FNORD",
+                        PointValue = 1
+                    }
                 };
 
-                var instructionBad = new Answer
-                {
-                    Name = "Spammer",
-                    Description = "You didn't read the instructions properly",
-                    Code = "k823bknciwe7w872",
-                    PointValue = -2
-                };
-
-                database.Answers.AddRange(instructionGood, instructionBad);
+                database.Answers.AddRange(answers);
             }
         }
     }
