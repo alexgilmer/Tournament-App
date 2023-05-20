@@ -1,4 +1,4 @@
-﻿namespace Tournament_App.Models.ViewModels.Admin
+﻿namespace Tournament_App.Models.ViewModels.Teams
 {
     public class EditTeamFormModel
     {

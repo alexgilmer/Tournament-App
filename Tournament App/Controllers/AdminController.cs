@@ -64,34 +64,5 @@ namespace Tournament_App.Controllers
             return RedirectToAction("Index", "Teams");
         }
 
-        [HttpGet]
-        public IActionResult EditTeam(int teamId)
-        {
-            Team? team = Database.Teams.Find(teamId);
-
-            if (team == null)
-                return NotFound();
-
-            var vm = new EditTeamViewModel
-            {
-                Team = team
-            };
-
-            return View(vm);
-        }
-
-        [HttpPost]
-        public IActionResult EditTeam(EditTeamFormModel vm)
-        {
-            Team? team = Database.Teams.Find(vm.TeamId);
-
-            if (team != null)
-            {
-                team.Name = vm.NewTeamName;
-                Database.SaveChanges();
-            }
-
-            return RedirectToAction("Index", "Teams");
-        }
     }
 }
