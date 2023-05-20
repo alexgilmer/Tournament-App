@@ -19,6 +19,8 @@ namespace Tournament_App.Data
 
                 var adminID = await EnsureUser(serviceProvider, seedUserPassword, "alex.gilmer@mitt.ca");
                 await EnsureRole(serviceProvider, adminID, Constants.AdminRole);
+
+                SeedDB(context);
             }
         }
 
@@ -79,6 +81,56 @@ namespace Tournament_App.Data
             IR = await userManager.AddToRoleAsync(user, role);
 
             return IR;
+        }
+
+        private static void SeedDB(ApplicationDbContext database)
+        {
+            if (!database.Teams.Any())
+            {
+                var amb = new Team
+                {
+                    Name = "Apathetic Mead Badgers"
+                };
+
+                var tau = new Team
+                {
+                    Name = "Tactical Assault Unicorns"
+                };
+
+                var pis = new Team
+                {
+                    Name = "Potassium-Infused Sleepwear"
+                };
+
+                var rfs = new Team
+                {
+                    Name = "Royal Fossil Society"
+                };
+
+                database.Teams.AddRange(amb, tau, pis, rfs);
+                database.SaveChanges();
+            }
+
+            if (!database.Answers.Any())
+            {
+                var instructionGood = new Answer
+                {
+                    Name = "Competent Reader",
+                    Description = "You read the starting instructions",
+                    Code = "lslfi8sern",
+                    PointValue = 1
+                };
+
+                var instructionBad = new Answer
+                {
+                    Name = "Spammer",
+                    Description = "You didn't read the instructions properly",
+                    Code = "k823bknciwe7w872",
+                    PointValue = -2
+                };
+
+                database.Answers.AddRange(instructionGood, instructionBad);
+            }
         }
     }
 }

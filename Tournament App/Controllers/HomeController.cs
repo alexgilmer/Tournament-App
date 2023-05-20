@@ -74,5 +74,10 @@ namespace Tournament_App.Controllers
 
             return View(vm);
         }
+
+        public IActionResult Instructions()
+        {
+            return View();
+        }
     }
 }

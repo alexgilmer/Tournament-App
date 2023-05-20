@@ -59,6 +59,23 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "puzzle-catch",
+    pattern: "puzzles/{action}",
+    defaults: new
+    {
+        controller = "Puzzles"
+    });
+
+app.MapControllerRoute(
+    name: "puzzle-default",
+    pattern: "puzzles/{*anything}",
+    defaults: new
+    {
+        controller = "Puzzles",
+        action = "Index"
+    });
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();

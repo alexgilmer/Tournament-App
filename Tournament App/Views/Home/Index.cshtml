@@ -15,6 +15,15 @@
         </div>
     </a>
 
+    <a class="d-block m-3" asp-controller="Home" asp-action="Instructions">
+        <div class="card" style="width: 18rem;">
+            <img src="https://placekitten.com/300/200?image=14" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Read the starting instructions</h5>
+            </div>
+        </div>
+    </a>
+
     @if (!SignInManager.IsSignedIn(User))
     {
         <a class="d-block m-3" asp-area="Identity" asp-page="/Account/Register">
@@ -26,4 +35,5 @@
             </div>
         </a>
     }
+
 </div>
