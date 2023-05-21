@@ -4,6 +4,9 @@
     {
         public IList<Group> Groups { get; set; }
 
+        public bool ShowPointEntryForm => LoggedInUserTeamName != null;
+        public string? LoggedInUserTeamName { get; set; }
+
         public class Group
         {
             public string Name { get; set; }

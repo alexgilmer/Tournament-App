@@ -149,6 +149,7 @@ namespace Tournament_App.Data
                 };
 
                 database.Answers.AddRange(answers);
+                database.SaveChanges();
             }
         }
     }

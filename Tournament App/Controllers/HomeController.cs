@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -13,11 +14,19 @@ namespace Tournament_App.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext Database;
+        private readonly UserManager<ApplicationUser> UserManager;
+        private readonly SignInManager<ApplicationUser> SigninManager;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public HomeController(
+            ILogger<HomeController> logger,
+            ApplicationDbContext db,
+            UserManager<ApplicationUser> um,
+            SignInManager<ApplicationUser> sm)
         {
             _logger = logger;
             Database = db;
+            UserManager = um;
+            SigninManager = sm;
         }
 
         public IActionResult Index()
@@ -36,7 +45,7 @@ namespace Tournament_App.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Leaderboard()
+        public async Task<IActionResult> Leaderboard()
         {
             var teams = Database.Teams.Include(t => t.TeamAnswers).ThenInclude(ta => ta.Answer).ToList();
 
@@ -71,6 +80,16 @@ namespace Tournament_App.Controllers
 
             // Insert data into view model
             var vm = new LeaderboardViewModel() { Groups = groups };
+
+            if (SigninManager.IsSignedIn(User))
+            {
+                var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                var userTeam = Database.Teams.Find(user.TeamId);
+                if (userTeam != null)
+                {
+                    vm.LoggedInUserTeamName = userTeam.Name;
+                }
+            }
 
             return View(vm);
         }

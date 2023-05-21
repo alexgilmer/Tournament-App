@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using Tournament_App.Data;
+using Tournament_App.Models;
 
 namespace Tournament_App.Controllers
 {
@@ -9,6 +12,13 @@ namespace Tournament_App.Controllers
         public const string SecondIpChallengeRoute = "/4dcdfff2";
         public const string ThirdIpChallengeRoute = "/a398c3f0";
         public const string FourthIpChallengeRoute = "/80847201";
+
+        private readonly ApplicationDbContext Database;
+
+        public PuzzlesController(ApplicationDbContext db)
+        {
+            Database = db;
+        }
 
         public IActionResult Index()
         {
@@ -41,6 +51,29 @@ namespace Tournament_App.Controllers
         {
             // answer: "119"
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult Submit(IFormCollection formData)
+        {
+            StringValues strings = formData["flag"];
+
+            if (strings.Count == 1)
+            {
+                string? flag = strings[0];
+                Answer? answer = Database.Answers.FirstOrDefault(a => a.Code == flag);
+                if (answer != null)
+                {
+                    return Json(answer);
+                }
+            }
+
+            return Json(new
+            {
+                something = "something else",
+                success = "some value",
+                error = "LOL"
+            });
         }
     }
 }
