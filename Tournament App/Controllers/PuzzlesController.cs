@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Tournament_App.Data;
 using Tournament_App.Models;
+using Tournament_App.Models.ViewModels.Puzzles;
 
 namespace Tournament_App.Controllers
 {
@@ -14,10 +16,14 @@ namespace Tournament_App.Controllers
         public const string FourthIpChallengeRoute = "/80847201";
 
         private readonly ApplicationDbContext Database;
+        private readonly UserManager<ApplicationUser> UserManager;
 
-        public PuzzlesController(ApplicationDbContext db)
+        public PuzzlesController(
+            ApplicationDbContext db,
+            UserManager<ApplicationUser> um)
         {
             Database = db;
+            UserManager = um;
         }
 
         public IActionResult Index()
@@ -53,27 +59,20 @@ namespace Tournament_App.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult Submit(IFormCollection formData)
+        [HttpGet]
+        public IActionResult Submit()
         {
-            StringValues strings = formData["flag"];
+            return View();
+        }
 
-            if (strings.Count == 1)
-            {
-                string? flag = strings[0];
-                Answer? answer = Database.Answers.FirstOrDefault(a => a.Code == flag);
-                if (answer != null)
-                {
-                    return Json(answer);
-                }
-            }
+        [HttpPost]
+        public async Task<JsonResult> Submit(IFormCollection formData)
+        {
+            ApplicationUser user = await UserManager.FindByNameAsync(User.Identity?.Name);
 
-            return Json(new
-            {
-                something = "something else",
-                success = "some value",
-                error = "LOL"
-            });
+            AnswerSubmissionResult result = new(Database, user, formData);
+
+            return Json(result);
         }
     }
 }

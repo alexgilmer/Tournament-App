@@ -23,9 +23,9 @@ function handleSubmission(event) {
 }
 
 function successFunction(response) {
-
+    console.log(response);
 }
 
 function errorFunction(response) {
-
+    console.log("Error function engaged.", response);
 }
