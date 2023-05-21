@@ -21,6 +21,11 @@ namespace Tournament_App.Data
             base.OnModelCreating(builder);
 
             builder.Entity<TeamAnswer>().HasKey(ta => new { ta.TeamId, ta.AnswerId });
+            builder.Entity<ApplicationUser>()
+                .HasOne(u => u.Team)
+                .WithMany(t => t.ApplicationUsers)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

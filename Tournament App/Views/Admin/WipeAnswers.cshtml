@@ -1,0 +1,8 @@
+﻿<h1>Confirmation page</h1>
+<h2>Are you sure you want to delete all of the answer codes?</h2>
+
+<form method="post" asp-controller="Admin" asp-action="WipeAnswers">
+    <input type="checkbox" name="Confirmed" value="true" id="Confirmed" />
+    <label for="Confirmed">Confirm deletion</label>
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</form>

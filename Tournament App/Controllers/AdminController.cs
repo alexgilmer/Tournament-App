@@ -64,5 +64,73 @@ namespace Tournament_App.Controllers
             return RedirectToAction("Index", "Teams");
         }
 
+        [HttpGet]
+        public IActionResult WipeTeams()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult WipeTeams(WipeDataFormModel vm)
+        {
+            if (vm.Confirmed)
+            {
+                Database.Users.Where(u => u.TeamId != null).Load();
+                Database.Teams.ExecuteDelete();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult WipeScoreBoard()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult WipeScoreBoard(WipeDataFormModel vm)
+        {
+            if (vm.Confirmed)
+            {
+                Database.TeamAnswers.ExecuteDelete();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult WipeAnswers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult WipeAnswers(WipeDataFormModel vm)
+        {
+            if (vm.Confirmed)
+            {
+                Database.Answers.ExecuteDelete();
+            }
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult WipePlayers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult WipePlayers(WipeDataFormModel vm)
+        {
+            if (vm.Confirmed)
+            {
+                var players = Database.ApplicationUsers
+                    .Where(u => u.UserName != "alex.gilmer@mitt.ca");
+
+                players.ExecuteDelete();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
