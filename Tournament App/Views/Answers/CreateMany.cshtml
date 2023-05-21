@@ -1,0 +1,10 @@
+﻿<h1>Use this page to create many answers at once</h1>
+<p>Data should be an array of Answer objects</p>
+
+<form method="post" asp-controller="Answers" asp-action="CreateMany">
+    <label for="input">The JSON string:</label>
+    <textarea name="input" id="input"></textarea>
+    <input type="checkbox" name="wipePreviousData" value="true" id="wipePreviousData" />
+    <label for="wipePreviousData">Wipe previous answers</label>
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</form>

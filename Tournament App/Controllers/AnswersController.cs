@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Tournament_App.Data;
 using Tournament_App.Models;
 using Tournament_App.Models.ViewModels.Answers;
@@ -40,6 +42,31 @@ namespace Tournament_App.Controllers
             };
             Database.Answers.Add(newAnswer);
             Database.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult CreateMany()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateMany(string input, bool wipePreviousData)
+        {
+            if (wipePreviousData)
+            {
+                Database.Answers.ExecuteDelete();
+            }
+
+            Answer[]? parsedJson = JsonConvert.DeserializeObject<Answer[]>(input);
+
+            if (parsedJson != null)
+            {
+                Database.Answers.AddRange(parsedJson);
+                Database.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
