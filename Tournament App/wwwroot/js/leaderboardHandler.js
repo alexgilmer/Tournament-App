@@ -5,6 +5,7 @@
 
 const teamListElem = document.getElementById("team-list");
 setInterval(updateLeaderBoard, 5000);
+updateLeaderBoard();
 
 function updateLeaderBoard() {
     $.ajax({
@@ -41,7 +42,7 @@ function getAccordionHtml(team) {
     <div id="team-collapsible-${team.id}" class="accordion-collapse collapse show" aria-labelledby="team-${team.id}">
         <div class="accordion-body">
             ${
-            team.members.map(m => `<span class="badge bg-info text-dark">${m.name}</span>`).join("")
+            team.members.map(m => `<a href="/admin/edituser?userId=${m.applicationUserId}"><span class="badge bg-info text-dark">${m.name}</span></a>`).join("")
             }
         </div>
     </div>`;
