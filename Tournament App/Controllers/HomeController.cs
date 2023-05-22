@@ -98,5 +98,20 @@ namespace Tournament_App.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public JsonResult GetLeaderboardUpdate()
+        {
+            var teams = Database.Teams
+                .Include(t => t.ApplicationUsers)
+                .Include(t => t.TeamAnswers)
+                .ThenInclude(ta => ta.Answer)
+                .OrderByDescending(t => t.TeamAnswers.Sum(ta => ta.Answer.PointValue))
+                .ToList();
+
+            var model = new LeaderboardUpdateModel(teams);
+
+            return Json(model);
+        }
     }
 }

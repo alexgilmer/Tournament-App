@@ -3,11 +3,11 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @model LeaderboardViewModel
 
-<script defer src="~/js/leaderboardHandler.js" asp-append-version="true"></script>
+<script defer src="~/js/leaderboardHandler.js?ver=1"></script>
 
 @if(Model.ShowPointEntryForm)
 {
-    <script defer src="~/js/submissionHandler.js" asp-append-version="true"></script>
+    <script defer src="~/js/submissionHandler.js?ver=1"></script>
 
     <form id="team-submission" class="mb-3">
         <p>You are currently signed in for team <strong>@Model.LoggedInUserTeamName</strong></p>
@@ -19,7 +19,7 @@
     </form>
 }
 
-<div class="accordion">
+<div class="accordion" id="team-list">
     @for (int i = 0; i < Model.Groups.Count; i++)
     {
         @if (Model.Groups[i].Name != "Unassigned" || User.IsInRole(Constants.AdminRole))

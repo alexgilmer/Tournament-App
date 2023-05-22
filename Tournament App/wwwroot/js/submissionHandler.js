@@ -33,8 +33,6 @@ function errorFunction(response) {
 }
 
 function getToastHtml(data) {
-    console.log("This happened with data: ", data);
-
     // success(green), warning(yellow), danger(red)
     let bgColor = "success";
     let textColor = "white";
