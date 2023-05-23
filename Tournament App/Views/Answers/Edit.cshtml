@@ -1,0 +1,34 @@
+﻿@model Answer
+
+<h1>You are currently editing an answer.</h1>
+
+<ul>
+    <li>Name: @Model.Name</li>
+    <li>Description: @Model.Description</li>
+    <li>Code: @Model.Code</li>
+    <li>Point value: @Model.PointValue</li>
+</ul>
+
+<form asp-controller="Answers" asp-action="Edit" method="post">
+    <div>
+        <label for="Name">Name</label>
+        <input type="text" name="Name" id="Name" value="@Model.Name" />
+    </div>
+    
+    <div>
+        <label for="Description">Description</label>
+        <input type="text" name="Description" id="Description" value="@Model.Description" />
+    </div>
+
+    <div>
+        <label for="Code">Code</label>
+        <input type="text" name="Code" id="Code" value="@Model.Code" />
+    </div>
+
+    <div>
+        <label for="PointValue">Point Value</label>
+        <input type="number" step="1" name="PointValue" id="PointValue" value="@Model.PointValue" />
+    </div>
+
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</form>

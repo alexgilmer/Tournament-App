@@ -70,5 +70,33 @@ namespace Tournament_App.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Answer? answer = Database.Answers.Find(id);
+
+            if (answer == null)
+                return NotFound();
+
+            return View(answer);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditAnswerFormModel vm)
+        {
+            Answer? answer = Database.Answers.Find(vm.Id);
+
+            if (answer == null)
+                return NotFound();
+
+            answer.Code = vm.Code;
+            answer.Name = vm.Name;
+            answer.Description = vm.Description;
+            answer.PointValue = vm.PointValue;
+
+            Database.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
