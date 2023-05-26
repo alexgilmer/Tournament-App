@@ -1,0 +1,35 @@
+﻿@model Tournament_App.Models.ViewModels.Home.LeaderboardUpdateModel
+
+<div class="card-container" id="card-container">
+    @foreach(var team in Model.Teams)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h4>@team.Name - @team.PointsScored points</h4>
+                <h5>
+                    @foreach(var member in team.Members)
+                    {
+                        <span class="badge bg-info rounded-pill">@member.Name</span>
+                    }
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <p>
+                    Flags: &nbsp;
+                    @foreach(var answer in team.Answers)
+                    {
+                        if (answer.PointValue > 0)
+                        {
+                            <span class="badge bg-success rounded-pill">@answer.Name</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger rounded-pill">@answer.Name</span>
+                        }
+                    }
+                </p>
+            </div>
+        </div>
+    }
+</div>

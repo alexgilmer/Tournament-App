@@ -3,11 +3,11 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @model LeaderboardViewModel
 
-<script defer src="~/js/leaderboardHandler.js?ver=1"></script>
+<script defer src="~/js/leaderboardHandler.js" asp-append-version="true"></script>
 
 @if(Model.ShowPointEntryForm)
 {
-    <script defer src="~/js/submissionHandler.js?ver=1"></script>
+    <script defer src="~/js/submissionHandler.js" asp-append-version="true"></script>
 
     <form id="team-submission" class="mb-3">
         <p>You are currently signed in for team <strong>@Model.LoggedInUserTeamName</strong></p>
@@ -19,39 +19,7 @@
     </form>
 }
 
-<div class="accordion" id="team-list">
-    @for (int i = 0; i < Model.Groups.Count; i++)
-    {
-        @if (Model.Groups[i].Name != "Unassigned" || User.IsInRole(Constants.AdminRole))
-        {
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="team-@i">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#team-collapsible-@i" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        @Model.Groups[i].Name:
-                        <text>&nbsp;<strong>@Model.Groups[i].Points Points</strong></text>
-                    </button>
-                </h2>
-                <div id="team-collapsible-@i" class="accordion-collapse collapse show" aria-labelledby="team-@i">
-                    <div class="accordion-body">
-                        @foreach (var member in Model.Groups[i].Members)
-                        {
-                            @if (User.IsInRole(Constants.AdminRole))
-                            {
-                                <a asp-controller="Admin" asp-action="EditUser" asp-route-userId="@member.ApplicationUserId">
-                                    <span class="badge bg-info text-dark">@member.Name</span>
-                                </a>
-                            }
-                            else
-                            {
-                                <span class="badge bg-info text-dark">@member.Name</span>
-                            }
-                        }
-                    </div>
-                </div>
-            </div>
-        }
-    }
-</div>
+<partial name="_LeaderboardPartial" model="Model.LeaderboardUpdateModel" />
 
 <div class="toast-container position-static bottom-0 end-0 p-3">
 

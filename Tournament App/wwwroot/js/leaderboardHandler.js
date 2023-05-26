@@ -20,30 +20,9 @@ function updateLeaderBoard() {
 }
 
 function leaderboardSuccess(response) {
-    const accordions = document.querySelectorAll(".accordion-item");
-    for (let i = 0; i < response.teams.length; i++) {
-        accordions[i].textContent = "";
-        accordions[i].insertAdjacentHTML("afterbegin", getAccordionHtml(response.teams[i]));
-    }
+    $("#card-container").html(response);
 }
 
 function leaderboardError(response) {
     console.log("Something broke: ", response);
-}
-
-function getAccordionHtml(team) {
-    return `
-    <h2 class="accordion-header" id="team-${team.id}">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#team-collapsible-${team.id}" aria-expanded="true" aria-controls="panelsStayOpen-collapse${team.id}">
-            ${team.name}:
-            &nbsp;<strong>${team.pointsScored} Points</strong>
-        </button>
-    </h2>
-    <div id="team-collapsible-${team.id}" class="accordion-collapse collapse show" aria-labelledby="team-${team.id}">
-        <div class="accordion-body">
-            ${
-            team.members.map(m => `<a href="/admin/edituser?userId=${m.applicationUserId}"><span class="badge bg-info text-dark">${m.name}</span></a>`).join("")
-            }
-        </div>
-    </div>`;
 }
