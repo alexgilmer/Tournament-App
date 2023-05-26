@@ -34,29 +34,29 @@ function errorFunction(response) {
 
 function getToastHtml(data) {
     // success(green), warning(yellow), danger(red)
-    let bgColor = "success";
-    let textColor = "white";
+    let bgColorClass = "success";
+    let textColorClass = "white";
 
-    if (!data.validCode) {
-        bgColor = "warning";
-        textColor = "dark"
+    if (!data.validFlag) {
+        bgColorClass = "warning";
+        textColorClass = "dark"
     }
 
     if (data.pointsAwarded < 0) {
-        bgColor = "danger";
-        textColor = "white";
+        bgColorClass = "danger";
+        textColorClass = "white";
     }
 
-    //data.ValidCode;
+    //data.validFlag;
     //data.AnswerName;
     //data.PointsAwarded;
     //data.Message;
 
     return `
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-${bgColor} text-${textColor}">
+        <div class="toast-header bg-${bgColorClass} text-${textColorClass}">
           <strong class="me-auto">${data.answerName}</strong>
-          <small class="text-${textColor}">${data.pointsAwarded} points</small>
+          <small class="text-${textColorClass}">${data.pointsAwarded} points</small>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">

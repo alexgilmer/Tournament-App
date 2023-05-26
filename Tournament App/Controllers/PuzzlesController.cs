@@ -70,7 +70,7 @@ namespace Tournament_App.Controllers
         {
             ApplicationUser user = await UserManager.FindByNameAsync(User.Identity?.Name);
 
-            AnswerSubmissionResult result = new(Database, user, formData);
+            FlagSubmissionResult result = new(Database, user, formData);
 
             return Json(result);
         }

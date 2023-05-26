@@ -4,14 +4,14 @@ using Tournament_App.Data;
 
 namespace Tournament_App.Models.ViewModels.Puzzles
 {
-    public class AnswerSubmissionResult
+    public class FlagSubmissionResult
     {
-        public bool ValidCode { get; }
+        public bool ValidFlag { get; }
         public string AnswerName { get; }
         public int PointsAwarded { get; }
         public string Message { get; }
 
-        public AnswerSubmissionResult(
+        public FlagSubmissionResult(
             ApplicationDbContext database,
             ApplicationUser user,
             IFormCollection formData)
@@ -29,38 +29,36 @@ namespace Tournament_App.Models.ViewModels.Puzzles
 
             if (userTeam == null)
             {
-                ValidCode = false;
+                ValidFlag = false;
                 AnswerName = string.Empty;
                 PointsAwarded = 0;
-                Message = "Team not found.";
+                Message = "Error: team not found.";
                 return;
             }
             
             if (answer == null)
             {
-                ValidCode = false;
-                AnswerName = string.Empty;
+                ValidFlag = false;
+                AnswerName = "Invalid flag";
                 PointsAwarded = 0;
-                Message = "Code not valid.";
+                Message = "No flag with that name in the database.";
                 return;
             }
 
             TeamAnswer? teamAnswer = database.TeamAnswers.FirstOrDefault(ta => ta.TeamId == userTeam.Id && ta.AnswerId == answer.Id);
             if (teamAnswer != null)
             {
-                ValidCode = false;
+                ValidFlag = false;
                 AnswerName = answer.Name;
                 PointsAwarded = 0;
-                Message = $"Team {userTeam.Name} tried to reuse a code! SHAAAAAAME!";
+                Message = $"Team {userTeam.Name} tried to reuse a flag! SHAAAAAAME!";
                 return;
             }
 
-            ValidCode = true;
+            ValidFlag = true;
             AnswerName = answer.Name;
             PointsAwarded = answer.PointValue;
-            Message = answer.PointValue > 0
-                ? $"Team {userTeam.Name} scores {answer.PointValue} point(s)!"
-                : $"Team {userTeam.Name} caught a red herring!  {-answer.PointValue} point(s) lost!";
+            Message = answer.Description;
 
             var ta = new TeamAnswer
             {
