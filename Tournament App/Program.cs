@@ -7,8 +7,7 @@ using Tournament_App.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Configuration.AddEnvironmentVariables();
-string connectionString = builder.Configuration["ConnectionString"];
+string connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
