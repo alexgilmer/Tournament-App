@@ -61,28 +61,60 @@
         <li>In the room with you is a computer</li>
         <li>It will only allow RDP access from 4 specific IP addresses</li>
         <li>In order to obtain an address, you will need a combination of NSA and SD expertise</li>
-        <li>
-            For NSA students: inquire with the tournament directors for subnetting instructions
-        </li>
-        <li>
-            For SD students, solve one of the 4 following puzzles for an IP address chunk.  The 4th one is the easiest!
+    </ul>
+    <article>
+        <h2>
+            NSA task
+        </h2>
+        <p>
+            Starting from 172.16.0.0 /12
+            Networks must be created to fit the following criteria:
             <ul>
                 <li>
-                    <a asp-controller="Puzzles" asp-action="IpChallenge1">Link 1</a>
+                    Faculty PCs need 952 useable IP addresses
                 </li>
                 <li>
-                    <a asp-controller="Puzzles" asp-action="IpChallenge2">Link 2</a>
+                    Lab PCs need 42,064 useable IP addresses
                 </li>
                 <li>
-                    <a asp-controller="Puzzles" asp-action="IpChallenge3">Link 3</a>
-                </li>
-                <li style="display: none">
-                    <a asp-controller="Puzzles" asp-action="IpChallenge4">Link 4</a>
+                    Server PCs need 283 useable IP addresses
                 </li>
                 <li>
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Link 5</a>
+                    Guest PCs need 32,767 useable IP addresses
+                </li>
+                <li>
+                    Student PCs need 100,100 usable IP addresses
+                </li>
+                <li>
+                    Your target subnet requires 254 useable IP addresses
                 </li>
             </ul>
-        </li>
-    </ul>
+        </p>
+    </article>
+
+    <article>
+        <h2>
+            SD Task
+        </h2>
+        <p>
+            Solve one of the 4 following puzzles for an IP address chunk.  The 4th one is the easiest!
+        </p>
+        <ul>
+            <li>
+                <a asp-controller="Puzzles" asp-action="IpChallenge1">Link 1</a>
+            </li>
+            <li>
+                <a asp-controller="Puzzles" asp-action="IpChallenge2">Link 2</a>
+            </li>
+            <li>
+                <a asp-controller="Puzzles" asp-action="IpChallenge3">Link 3</a>
+            </li>
+            <li style="display: none">
+                <a asp-controller="Puzzles" asp-action="IpChallenge4">Link 4</a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Link 5</a>
+            </li>
+        </ul>
+    </article>
 </section>
