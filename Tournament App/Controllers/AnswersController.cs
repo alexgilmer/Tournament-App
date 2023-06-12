@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Tournament_App.Data;
@@ -27,19 +28,31 @@ namespace Tournament_App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.AnswerList = new SelectList(Database.Answers, "Id", "Name");
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(CreateAnswerFormModel vm)
         {
+            if (!vm.IsValid)
+            {
+                ViewBag.AnswerList = new SelectList(Database.Answers, "Id", "Name");
+                return View();
+            }
+
             Answer newAnswer = new()
             {
                 Name = vm.Name,
                 Code = vm.Code,
                 Description = vm.Description,
-                PointValue = vm.PointValue
+                PointValue = vm.PointValue,
+                Rarity = vm.Rarity,
+                ImageFileName = vm.FileName,
+                DescriptionVisible = vm.DescriptionVisible,
+                ParentAnswerId = vm.ParentAnswer,
             };
+
             Database.Answers.Add(newAnswer);
             Database.SaveChanges();
 
@@ -74,18 +87,19 @@ namespace Tournament_App.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Answer? answer = Database.Answers.Find(id);
-
+            Answer? answer = Database.Answers.Include(a => a.ParentAnswer).FirstOrDefault(a => a.Id == id);
+            
             if (answer == null)
                 return NotFound();
 
+            ViewBag.AnswerList = new SelectList(Database.Answers, "Id", "Name");
             return View(answer);
         }
 
         [HttpPost]
         public IActionResult Edit(EditAnswerFormModel vm)
         {
-            Answer? answer = Database.Answers.Find(vm.Id);
+            Answer? answer = Database.Answers.Include(a => a.ParentAnswer).FirstOrDefault(a => a.Id == vm.Id);
 
             if (answer == null)
                 return NotFound();
@@ -94,6 +108,10 @@ namespace Tournament_App.Controllers
             answer.Name = vm.Name;
             answer.Description = vm.Description;
             answer.PointValue = vm.PointValue;
+            answer.DescriptionVisible = vm.DescriptionVisible;
+            answer.ImageFileName = vm.FileName;
+            answer.ParentAnswerId = vm.ParentAnswerId;
+            answer.Rarity = vm.Rarity;
 
             Database.SaveChanges();
             return RedirectToAction("Index");

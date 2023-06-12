@@ -7,6 +7,10 @@
     <li>Description: @Model.Description</li>
     <li>Code: @Model.Code</li>
     <li>Point value: @Model.PointValue</li>
+    <li>Rarity: <span style="color: @(Constants.GetRarityColor(Model.Rarity)); background-color: #555555">@Model.Rarity.ToString()</span></li>
+    <li>Image File Name: @Model.ImageFileName</li>
+    <li>Description visible: @Model.DescriptionVisible</li>
+    <li>Parent answer: @(Model.ParentAnswer != null ? Model.ParentAnswer.Name : "None")</li>
 </ul>
 
 <form asp-controller="Answers" asp-action="Edit" method="post">
@@ -18,6 +22,10 @@
     <div>
         <label for="Description">Description</label>
         <input type="text" name="Description" id="Description" value="@Model.Description" />
+        <div>
+            <input type="checkbox" name="DescriptionVisible" id="DescriptionVisible" />
+            <label for="DescriptionVisible">Description Visible</label>
+        </div>
     </div>
 
     <div>
@@ -29,6 +37,35 @@
         <label for="PointValue">Point Value</label>
         <input type="number" step="1" name="PointValue" id="PointValue" value="@Model.PointValue" />
     </div>
+
+    <div class="mb-3">
+        <label for="Rarity">Rarity</label>
+        <select name="Rarity" id="Rarity">
+            @foreach (AnswerRarity r in Enum.GetValues<AnswerRarity>())
+            {
+                <option
+                    value="@((int)r)"
+                    style="background-color: @Constants.GetRarityColor(r)"
+                    selected="@(Model.Rarity == r)"
+                >
+                    @r.ToString()
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="FileName" name="FileName" value="@Model.ImageFileName"/>
+        <label for="FileName">File Name</label>
+    </div>
+
+    <div class="mb-3">
+        <label for="ParentAnswer">Parent Answer</label>
+        <select name="ParentAnswer" asp-items="@ViewBag.AnswerList" value="@Model.ParentAnswerId">
+            <option value="">None</option>
+        </select>
+    </div>
+
 
     <input type="submit" value="Submit" class="btn btn-primary" />
 </form>

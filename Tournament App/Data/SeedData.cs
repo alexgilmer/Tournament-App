@@ -120,7 +120,11 @@ namespace Tournament_App.Data
                         Name = "Competent Reader",
                         Description = "You read the starting instructions",
                         Code = "lslfi8sern",
-                        PointValue = 1
+                        PointValue = 1,
+                        Rarity = AnswerRarity.Common,
+                        ImageFileName = "book.gif",
+                        DescriptionVisible = true,
+                        ParentAnswerId = null,
                     },
 
                     new Answer
@@ -128,7 +132,11 @@ namespace Tournament_App.Data
                         Name = "Spammer",
                         Description = "You didn't read the instructions properly",
                         Code = "k823bknciwe7w872",
-                        PointValue = -2
+                        PointValue = -2,
+                        Rarity = AnswerRarity.RedHerring,
+                        ImageFileName = "broken_glasses.gif",
+                        DescriptionVisible = true,
+                        ParentAnswerId = null,
                     },
 
                     new Answer
@@ -136,7 +144,11 @@ namespace Tournament_App.Data
                         Name = "Fjord",
                         Description = "You found the hidden instruction text",
                         Code = "FNORD",
-                        PointValue = 1
+                        PointValue = 1,
+                        Rarity = AnswerRarity.Common,
+                        ImageFileName = "fjord.gif",
+                        DescriptionVisible = false,
+                        ParentAnswerId = null,
                     },
 
                     new Answer
@@ -144,7 +156,11 @@ namespace Tournament_App.Data
                         Name = "A Magic Phone Number",
                         Description = "You dodged the Rickroll",
                         Code = "8675309",
-                        PointValue = 1
+                        PointValue = 1,
+                        Rarity = AnswerRarity.Common,
+                        ImageFileName = "telephone.gif",
+                        DescriptionVisible = false,
+                        ParentAnswerId = null,
                     }
                 };
 

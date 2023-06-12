@@ -7,6 +7,10 @@
     <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Description" name="Description" />
         <label for="Description">Description</label>
+        <div>
+            <input type="checkbox" name="DescriptionVisible" id="DescriptionVisible" />
+            <label for="DescriptionVisible">Description Visible</label>
+        </div>
     </div>
     <div class="form-floating mb-3">
         <input type="text" class="form-control" id="Code" name="Code" />
@@ -15,6 +19,25 @@
     <div class="mb-3">
         <label for="PointValue">Point value</label>
         <input type="number" step="1" class="form-control" id="PointValue" name="PointValue" />
+    </div>
+    <div class="mb-3">
+        <label for="Rarity">Rarity</label>
+        <select name="Rarity" id="Rarity">
+            @foreach(AnswerRarity r in Enum.GetValues<AnswerRarity>())
+            {
+                <option value="@((int)r)" style="background-color: @Constants.GetRarityColor(r)">@r.ToString()</option>
+            }
+        </select>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="FileName" name="FileName" />
+        <label for="FileName">File Name</label>
+    </div>
+    <div class="mb-3">
+        <label for="ParentAnswer">Parent Answer</label>
+        <select name="ParentAnswer" asp-items="@ViewBag.AnswerList">
+            <option value="">None</option>
+        </select>
     </div>
     <input type="submit" value="Submit" />
 </form>
