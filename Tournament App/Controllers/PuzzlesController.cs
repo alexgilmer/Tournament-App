@@ -9,11 +9,13 @@ namespace Tournament_App.Controllers
 {
     public class PuzzlesController : Controller
     {
+        public const string ControllerBaseRoute = "/puzzles";
+
         // These are just commit hashes LOL
-        public const string FirstIpChallengeRoute = "/001e84b4";
-        public const string SecondIpChallengeRoute = "/4dcdfff2";
-        public const string ThirdIpChallengeRoute = "/a398c3f0";
-        public const string FourthIpChallengeRoute = "/80847201";
+        public const string FirstIpChallengeRoute = ControllerBaseRoute + "/001e84b4";
+        public const string SecondIpChallengeRoute = ControllerBaseRoute + "/4dcdfff2";
+        public const string ThirdIpChallengeRoute = ControllerBaseRoute + "/a398c3f0";
+        public const string FourthIpChallengeRoute = ControllerBaseRoute + "/80847201";
 
         private readonly ApplicationDbContext Database;
         private readonly UserManager<ApplicationUser> UserManager;
