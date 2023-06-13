@@ -107,14 +107,14 @@ namespace Tournament_App.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            public int TeamSelection { get; set; }
+            public Guid? TeamSelection { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             var teams = Database.Teams.ToList().Select(t => new SelectListItem(t.Name, t.Id.ToString())).ToList();
-            teams.Insert(0, new SelectListItem("Unassigned", "0"));
+            teams.Insert(0, new SelectListItem("Unassigned", ""));
             TeamSelectList = teams;
 
             ReturnUrl = returnUrl;
@@ -129,7 +129,7 @@ namespace Tournament_App.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.TeamId = Input.TeamSelection == 0 ? null : Input.TeamSelection;
+                user.TeamId = Input.TeamSelection;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

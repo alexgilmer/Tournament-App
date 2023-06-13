@@ -3,7 +3,7 @@
     public class Team
     {
         // Self properties
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         // FK properties

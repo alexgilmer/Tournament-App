@@ -50,7 +50,7 @@ namespace Tournament_App.Controllers
             if (user == null)
                 return NotFound();
 
-            if (vm.NewTeamId == 0)
+            if (vm.NewTeamId == null)
             {
                 user.TeamId = null;
             }

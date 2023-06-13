@@ -16,7 +16,7 @@
 
         public class LeaderboardTeam
         {
-            public int Id { get; set; }
+            public Guid Id { get; set; }
             public string Name { get; set; }
             public int PointsScored { get; set; }
             public IList<LeaderboardTeamAnswer> Answers { get; set; }

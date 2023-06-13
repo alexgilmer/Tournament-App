@@ -5,7 +5,7 @@
         // Self properties
         
         // FK properties
-        public int TeamId { get; set; }
+        public Guid TeamId { get; set; }
         public int AnswerId { get; set; }
 
         // Navigation properties

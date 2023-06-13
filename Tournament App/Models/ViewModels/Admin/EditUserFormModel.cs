@@ -3,6 +3,6 @@
     public class EditUserFormModel
     {
         public string ApplicationUserId { get; set; }
-        public int NewTeamId { get; set; }
+        public Guid? NewTeamId { get; set; }
     }
 }
