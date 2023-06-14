@@ -1,0 +1,15 @@
+﻿@model Tournament_App.Models.ViewModels.Answers.ManageChildrenViewModel
+
+<h1>You are currently managing the children for <strong>@Model.Answer.Name</strong></h1>
+
+<form method="post" asp-controller="Answers" asp-action="ManageChildren">
+    <div class="mb-3">
+        <p>Reminder: <strong>CTRL-click</strong> to modify the list</p>
+        <select style="resize:both" asp-items="Model.AnswerSelectList" name="children" id="children" multiple="multiple"></select>
+    </div>
+
+    <div class="mb-3">
+        <input type="hidden" value="@Model.Answer.Id" name="answerId" />
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>

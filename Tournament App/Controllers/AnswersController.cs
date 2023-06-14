@@ -116,5 +116,51 @@ namespace Tournament_App.Controllers
             Database.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult ManageChildren(int id)
+        {
+            Answer? answer = Database.Answers
+                .Include(a => a.ParentAnswer)
+                .Include(a => a.ChildAnswers)
+                .FirstOrDefault(a => a.Id == id);
+
+            if (answer == null)
+                return NotFound();
+
+            IEnumerable<Answer> allAnswers = Database.Answers;
+            IEnumerable<Answer> currentChildren = Database.Answers.Where(a => a.ParentAnswerId == id);
+
+            var vm = new ManageChildrenViewModel(answer, allAnswers, currentChildren);
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult ManageChildren(ICollection<int> children, int answerId)
+        {
+            Answer? answer = Database.Answers.Find(answerId);
+
+            if (answer == null)
+                return NotFound();
+
+            foreach (Answer a in Database.Answers.Where(a => a.ParentAnswerId == answer.Id))
+            {
+                a.ParentAnswerId = null;
+            }
+
+            foreach (int id in children)
+            {
+                Answer? a = Database.Answers.Find(id);
+                if (a != null)
+                {
+                    a.ParentAnswerId = answer.Id;
+                }
+            }
+
+            Database.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
