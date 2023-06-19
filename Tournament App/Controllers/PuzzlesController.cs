@@ -76,5 +76,12 @@ namespace Tournament_App.Controllers
 
             return Json(result);
         }
+
+        [HttpGet]
+        [Route(ControllerBaseRoute + "/thepalindome")]
+        public IActionResult Palindome()
+        {
+            return View();
+        }
     }
 }
