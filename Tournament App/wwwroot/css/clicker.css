@@ -1,0 +1,202 @@
+.left-side {
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-side {
+    justify-content: center;
+}
+
+#clicker-target {
+    position: relative;
+
+    height: 100px;
+    width: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 40px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#clicker-target div.spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation-name: clicker-spinner;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+#clicker-target div.time-10 {
+    animation-duration: 1.0s;
+}
+
+#clicker-target div.time-15 {
+    animation-duration: 1.5s;
+}
+
+#clicker-target div.time-20 {
+    animation-duration: 2.0s;
+}
+
+#clicker-target div.time-25 {
+    animation-duration: 2.5s;
+}
+
+#clicker-target div.time-30 {
+    animation-duration: 3.0s;
+}
+
+#clicker-target div.time-35 {
+    animation-duration: 3.5s;
+}
+
+#clicker-target div.time-40 {
+    animation-duration: 4.0s;
+}
+
+#clicker-target div.reverse {
+    animation-direction: reverse;
+}
+
+#clicker-target div.stilted {
+    animation-timing-function: cubic-bezier(0.95, 0.05, 0.8, 0.04);
+}
+
+#clicker-target div.offset-quarter-turn {
+    animation-name: clicker-spinner-offset-quarter;
+}
+
+#clicker-target div.offset-half-turn {
+    animation-name: clicker-spinner-offset-half;
+}
+
+#clicker-target div.offset-three-quarter-turn {
+    animation-name: clicker-spinner-offset-three-quarter;
+}
+
+@keyframes clicker-spinner {
+    0%  {transform: rotate(0)}
+    33% {
+        transform: rotate(0.33turn)
+    }
+    67% {
+        transform: rotate(0.67turn)
+    }
+    100% {
+        transform: rotate(1.0turn)
+    }
+}
+
+@keyframes clicker-spinner-offset-quarter {
+    0% {
+        transform: rotate(0.25turn)
+    }
+
+    33% {
+        transform: rotate(0.583turn)
+    }
+
+    67% {
+        transform: rotate(0.917turn)
+    }
+
+    100% {
+        transform: rotate(1.25turn)
+    }
+}
+
+@keyframes clicker-spinner-offset-half {
+    0% {
+        transform: rotate(0.5turn)
+    }
+
+    33% {
+        transform: rotate(0.83turn)
+    }
+
+    67% {
+        transform: rotate(1.17turn)
+    }
+
+    100% {
+        transform: rotate(1.5turn)
+    }
+}
+
+@keyframes clicker-spinner-offset-three-quarter {
+    0% {
+        transform: rotate(0.75turn)
+    }
+
+    33% {
+        transform: rotate(1.083turn)
+    }
+
+    67% {
+        transform: rotate(1.417turn)
+    }
+
+    100% {
+        transform: rotate(1.75turn)
+    }
+}
+
+#interval-timer-container,
+#click-counter-container {
+    position: relative;
+    width: 200px;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+#interval-timer-container .interval-timer,
+#click-counter-container .click-counter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#timer-box {
+    right: 0;
+    border: 1px solid black;
+}
+
+#counter-box {
+    right: 0;
+    border: 1px solid black;
+}
+
+#counter-fill {
+    background-color: deepskyblue;
+}
+
+.buyable-info {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    bottom: 1em;
+}
+
+.buyable-item {
+    cursor: pointer;
+    user-select: none;
+}
+
+.buyable-item:hover {
+    background-color: #DDDDDD;
+}

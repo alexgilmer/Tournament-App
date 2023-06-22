@@ -1,0 +1,144 @@
+﻿@model Tournament_App.Models.ViewModels.Puzzles.ClickerGameViewModel
+
+<script defer src="~/js/clicker-min.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/clicker.css" asp-append-version="true" />
+
+<div id="data-elem" style="display: none;" data-max-clicks-per-interval="@Model.MaxClicksPerInterval">
+    @if(Model.Message != null)
+    {
+        <p id="hint">@Model.Message</p>
+    }
+</div>
+
+<div class="container row">
+    <h1 class="text-center">&lt;[{(BRACKET CLICKER)}]&gt;</h1>
+    <div class="col-6 left-side">
+        <div id="clicker-target" class="clickable">
+            &oplus;
+            <div class="spinner time-40">
+                [&nbsp;]
+            </div>
+            <div class="spinner time-25">
+                (&nbsp;&nbsp;&nbsp;)
+            </div>
+            <div class="spinner time-30 stilted">
+                &#123;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+            </div>
+            <div class="spinner time-30 stilted offset-quarter-turn">
+                &#123;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 right-side">
+        <h2>
+            Player Score: <span id="player-score-text">0</span>
+        </h2>
+
+        <div id="interval-timer-container">
+            <div class="interval-timer" id="timer-box"></div>
+            <div class="interval-timer" id="timer-fill"></div>
+        </div>
+
+        <div id="click-counter-container">
+            <div class="click-counter" id="counter-box"></div>
+            <div class="click-counter" id="counter-fill"></div>
+        </div>
+
+        <div id="buyables-container" class="w-100">
+            <div class="buyable-item card w-100 mb-2" data-price="25">
+                <div class="card-body">
+                    <h5 class="card-title w-100">Auto-Mouse</h5>
+                    <p class="card-text">An extra mouse to provide clicks!</p>
+                    <div class="buyable-info">
+                        <h5>Price: 25</h5>
+                        <h5>Quantity: 0</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buyable-item card w-100 mb-2" data-price="100">
+                <div class="card-body">
+                    <h5 class="card-title w-100">Interval Quickening</h5>
+                    <p class="card-text">Make that pesky interval run faster!</p>
+                    <div class="buyable-info">
+                        <h5>Price: 100</h5>
+                        <h5>Quantity: 0</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buyable-item card w-100 mb-2" data-price="500">
+                <div class="card-body">
+                    <h5 class="card-title w-100">Extra capacity</h5>
+                    <p class="card-text">Fit extra clicks into your intervals!</p>
+                    <div class="buyable-info">
+                        <h5>Price: 500</h5>
+                        <h5>Quantity: 0</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buyable-item card w-100 mb-2" data-price="20000">
+                <div class="card-body">
+                    <h5 class="card-title w-100">Win the game</h5>
+                    <p class="card-text">Get your flag, and be on your way.</p>
+                    <div class="buyable-info">
+                        <h5>Price: 20000</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="can-afford" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Broken!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Todo: Implement purchasable items</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="cannot-afford" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Too expensive!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You cannot afford this item</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bailout-offer" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Having trouble?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Want a hint to help you beat this game? Here's a negative flag to "Spend" some of your points: <span style="font-family: monospace;">knockoffcookieclicker</span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

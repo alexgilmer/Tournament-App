@@ -83,5 +83,14 @@ namespace Tournament_App.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Route(ControllerBaseRoute + "/bracketClicker")]
+        public IActionResult ClickerGame()
+        {
+            ClickerGameViewModel vm = new(Request.Query);
+
+            return View(vm);
+        }
     }
 }
