@@ -167,6 +167,23 @@ namespace Tournament_App.Data
                 database.Answers.AddRange(answers);
                 database.SaveChanges();
             }
+
+            if (database.Teams.Any() && database.Answers.Any() && !database.TeamAnswers.Any())
+            {
+                foreach (Answer a in database.Answers.ToArray())
+                {
+                    int teamIndex = new Random().Next(database.Teams.Count());
+                    Team[] teams = database.Teams.ToArray();
+
+                    TeamAnswer newAnswer = new()
+                    {
+                        TeamId = teams[teamIndex].Id,
+                        AnswerId = a.Id,
+                    };
+                    database.TeamAnswers.Add(newAnswer);
+                }
+                database.SaveChanges();
+            }
         }
     }
 }
