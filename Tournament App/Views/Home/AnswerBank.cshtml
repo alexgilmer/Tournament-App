@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Tournament_App.Models.ViewModels.Home.AnswerPartialViewModel>
+
+<h1>This is the answer bank!</h1>
+@foreach (var a in Model) {
+    <partial name="_AnswerPartial" model="@a" />
+}

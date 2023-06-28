@@ -90,5 +90,15 @@ namespace Tournament_App.Controllers
 
             return PartialView("_LeaderboardPartial", model);
         }
+
+        public IActionResult AnswerBank()
+        {
+            List<AnswerPartialViewModel> result = Database.Answers
+                .ToList()
+                .Select(a => new AnswerPartialViewModel(a, displayImage: true, displayName: true))
+                .ToList();
+
+            return View(result);
+        }
     }
 }
