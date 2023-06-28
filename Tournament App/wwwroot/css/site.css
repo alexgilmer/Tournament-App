@@ -16,3 +16,64 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.flag-container {
+    position: relative;
+    
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+
+    font-size: 12px;
+}
+
+.flag-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    object-fit: cover;
+}
+
+.flag-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(100% + 8px);
+    width: 512px;
+    
+    border-radius: 8px;
+    padding: 4px 8px;
+    
+    background-color: black;
+    color: #fdc900;
+
+    display: none;
+}
+
+.flag-content .flag-points {
+    position: absolute;
+    right: 8px;
+    top: 4px;
+}
+
+.FLAG_LOOK_AT_ME_IM_MR_CSS {
+    display: none;
+    direction: rtl;
+    background: left;
+    border-top-right-radius: 3.14em;
+    contain-intrinsic-block-size: revert-layer;
+    voice-family: old;
+    unicode-bidi: isolate-override;
+    cue-after: none;
+    float: inline-end;
+    orphans: 666;
+    quotes: "";
+    hanging-punctuation: first;
+}
+
+.flag-container:hover .flag-content {
+    display: block;
+}

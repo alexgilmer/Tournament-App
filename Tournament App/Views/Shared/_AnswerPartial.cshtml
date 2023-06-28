@@ -1,16 +1,14 @@
 ﻿@model Tournament_App.Models.ViewModels.Home.AnswerPartialViewModel
 
-<div class="card mb-3">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="@Model.ImageFileName" class="img-fluid rounded-start">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">@Model.Name</h5>
-                <p class="card-text">@Model.Description</p>
-                <p class="card-text"><small class="text-muted">@Model.PointValue points</small></p>
-            </div>
-        </div>
+
+<div class="flag-container">
+    <div class="flag-image">
+        <img src="@Model.ImageFileName" class="img-fluid rounded-start">
+    </div>
+
+    <div class="flag-content">
+        <h5>@Model.Name</h5>
+        <p class="flag-points h5">@Model.PointValueText</p>
+        <p>@Model.Rarity - @Model.Description</p>
     </div>
 </div>
