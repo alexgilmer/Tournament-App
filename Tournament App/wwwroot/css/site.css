@@ -39,10 +39,11 @@ body {
 
 .flag-content {
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: 20%;
+    bottom: -20%;
     left: calc(100% + 8px);
     width: 512px;
+    z-index: 1;
     
     border-radius: 8px;
     padding: 4px 8px;

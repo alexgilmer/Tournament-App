@@ -6,7 +6,7 @@
 
         public const string AnswerHiddenIcon = "autobot.png";
         public const string AnswerHiddenName = "Hidden";
-        public const string AnswerHiddenDescription = "This flag's description is hidden until it's captured";
+        public const string AnswerHiddenDescription = "This flag's description is hidden";
 
         public const string AnswerMissingIcon = "phone.png";
         public const string AnswerMissingName = "ERROR: MISSING TITLE";
