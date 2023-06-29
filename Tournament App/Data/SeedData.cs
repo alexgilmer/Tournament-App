@@ -85,8 +85,12 @@ namespace Tournament_App.Data
 
         private static void SeedDB(ApplicationDbContext database)
         {
+            bool seededTeams = false;
+            bool seededAnswers = false;
+
             if (!database.Teams.Any())
             {
+                seededTeams = true;
                 var amb = new Team
                 {
                     Name = "Apathetic Mead Badgers"
@@ -113,6 +117,7 @@ namespace Tournament_App.Data
 
             if (!database.Answers.Any())
             {
+                seededAnswers = true;
                 var answers = new List<Answer>
                 {
                     new Answer
@@ -168,7 +173,12 @@ namespace Tournament_App.Data
                 database.SaveChanges();
             }
 
-            if (database.Teams.Any() && database.Answers.Any() && !database.TeamAnswers.Any())
+            if (
+                database.Teams.Any()
+                && database.Answers.Any()
+                && !database.TeamAnswers.Any()
+                && (seededAnswers || seededTeams)
+                )
             {
                 foreach (Answer a in database.Answers.ToArray())
                 {
