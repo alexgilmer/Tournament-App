@@ -27,7 +27,7 @@
     }
 
     function playerHasWon() {
-        return playerScore >= 20000
+        return playerScore >= 10000
     }
 
     function showVictory() {

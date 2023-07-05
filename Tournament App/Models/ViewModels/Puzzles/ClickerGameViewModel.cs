@@ -51,6 +51,9 @@ namespace Tournament_App.Models.ViewModels.Puzzles
 
         private void ApplyMaxClicks(int num)
         {
+            Message = null;
+            MaxClicksPerInterval = num;
+
             if (num < 1)
             {
                 Message = "Minimum must be at least one.  That, or the parser broke trying to read the data and it returned zero.  Try an integer value from 1 to 1000.";
@@ -62,9 +65,6 @@ namespace Tournament_App.Models.ViewModels.Puzzles
                 Message = "Maximum cannot be higher than 1000 per interval";
                 MaxClicksPerInterval = 1000;
             }
-
-            Message = null;
-            MaxClicksPerInterval = num;
         }
     }
 }
