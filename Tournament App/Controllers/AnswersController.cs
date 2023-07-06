@@ -48,7 +48,7 @@ namespace Tournament_App.Controllers
                 Description = vm.Description,
                 PointValue = vm.PointValue,
                 Rarity = vm.Rarity,
-                ImageFileName = vm.FileName,
+                ImageFileName = vm.FileName ?? string.Empty,
                 DescriptionVisible = vm.DescriptionVisible,
                 ParentAnswerId = vm.ParentAnswer,
             };

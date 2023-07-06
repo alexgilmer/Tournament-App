@@ -47,28 +47,31 @@ namespace Tournament_App.Controllers
 
         public async Task<IActionResult> Leaderboard()
         {
-            var teams = Database.Teams
-                .Include(t => t.ApplicationUsers)
-                .Include(t => t.TeamAnswers)
-                .ThenInclude(ta => ta.Answer)
-                .ToList();
-
-            // Insert data into view model
-            var vm = new LeaderboardViewModel();
-
-            vm.LeaderboardUpdateModel = new LeaderboardUpdateModel(teams);
-
             if (SigninManager.IsSignedIn(User))
             {
-                var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                var userTeam = Database.Teams.Find(user.TeamId);
+                ApplicationUser? user = await UserManager.FindByNameAsync(User.Identity?.Name);
+                Team? userTeam = Database.Teams.Find(user?.TeamId);
                 if (userTeam != null)
                 {
-                    vm.LoggedInUserTeamName = userTeam.Name;
+                    return TeamLeaderboard(userTeam.Id, userTeam.Name);
                 }
             }
 
-            return View(vm);
+            return NeutralLeaderboard();
+        }
+
+        private IActionResult NeutralLeaderboard()
+        {
+            var vm = new NeutralLeaderboardViewModel(Database);
+
+            return View("NeutralLeaderboard", vm);
+        }
+
+        private IActionResult TeamLeaderboard(Guid userTeamId, string userTeamName)
+        {
+            var vm = new TeamLeaderboardViewModel(userTeamId, userTeamName, Database);
+
+            return View("TeamLeaderboard", vm);
         }
 
         public IActionResult Instructions()

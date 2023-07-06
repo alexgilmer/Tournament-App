@@ -5,20 +5,6 @@
 
 <script defer src="~/js/leaderboardHandler.js" asp-append-version="true"></script>
 
-@if(Model.ShowPointEntryForm)
-{
-    <script defer src="~/js/submissionHandler.js" asp-append-version="true"></script>
-
-    <form id="team-submission" class="mb-3">
-        <p>You are currently signed in for team <strong>@Model.LoggedInUserTeamName</strong></p>
-        <label>
-            Enter your flags here:
-            <input type="text" name="flag" id="flag" />
-        </label>
-        <input type="submit" value="Submit" />
-    </form>
-}
-
 <partial name="_LeaderboardPartial" model="Model.LeaderboardUpdateModel" />
 
 <div class="toast-container position-static bottom-0 end-0 p-3">

@@ -1,0 +1,30 @@
+﻿@model Tournament_App.Models.ViewModels.Home.TeamLeaderboardViewModel
+
+<script defer src="~/js/teamLeaderboardHandler.js" asp-append-version="true"></script>
+<script defer src="~/js/submissionHandler.js" asp-append-version="true"></script>
+
+<div class="row">
+    <div class="col">
+        <form id="team-submission" class="mb-1 row">
+            <div>
+                <label>
+                    Enter your flags for team <strong>@Model.UserTeamName</strong> here:
+                    <input type="text" name="flag" id="flag" />
+                </label>
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-8 border-end">
+        <partial name="_TeamLeaderboardPartial" model="Model.UpdateModel" />
+    </div>
+
+    <div class="col-4 border-start">
+        <h2 class="text-center">Announcements</h2>
+        <div class="toast-container">
+        </div>
+    </div>
+</div>

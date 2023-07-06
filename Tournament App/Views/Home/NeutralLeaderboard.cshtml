@@ -1,0 +1,16 @@
+﻿@model Tournament_App.Models.ViewModels.Home.NeutralLeaderboardViewModel
+
+<script defer src="~/js/neutralLeaderboardHandler.js" asp-append-version="true"></script>
+
+<div class="row">
+    <div class="col-8 border-end">
+        <partial name="_NeutralLeaderboardPartial" model="Model.UpdateModel" />
+    </div>
+
+    <div class="col-4 border-start">
+        <h2 class="text-center">Announcements</h2>
+        <div class="toast-container">
+        </div>
+    </div>
+</div>
+
