@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Tournament_App.Data;
 using Tournament_App.Models;
+using Tournament_App.Models.ProcessingModels;
 using Tournament_App.Models.ViewModels.Answers;
 
 namespace Tournament_App.Controllers
@@ -73,12 +74,26 @@ namespace Tournament_App.Controllers
                 Database.Answers.ExecuteDelete();
             }
 
-            Answer[]? parsedJson = JsonConvert.DeserializeObject<Answer[]>(input);
+            AnswerFromJson[]? parsedJson = JsonConvert.DeserializeObject<AnswerFromJson[]>(input);
 
             if (parsedJson != null)
             {
-                Database.Answers.AddRange(parsedJson);
-                Database.SaveChanges();
+                foreach (var a in parsedJson)
+                {
+                    Answer newAnswer = new()
+                    {
+                        Name = a.Name,
+                        Code = a.Code,
+                        Description = a.Description,
+                        PointValue = a.PointValue,
+                        Rarity = a.Rarity,
+                        ImageFileName = a.ImageFileName,
+                        DescriptionVisible = a.DescriptionVisible,
+                        ParentAnswer = Database.Answers.FirstOrDefault(ans => ans.Name == a.ParentAnswerName)
+                    };
+                    Database.Answers.Add(newAnswer);
+                    Database.SaveChanges();
+                }
             }
 
             return RedirectToAction("Index");
