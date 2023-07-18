@@ -94,6 +94,30 @@ namespace Tournament_App.Controllers
             return PartialView("_LeaderboardPartial", model);
         }
 
+        public async Task<PartialViewResult> GetTeamLeaderboardUpdate()
+        {
+            if (SigninManager.IsSignedIn(User))
+            {
+                ApplicationUser? user = await UserManager.FindByNameAsync(User.Identity?.Name);
+                Team? userTeam = Database.Teams.Find(user?.TeamId);
+                if (userTeam != null)
+                {
+                    var model = new TeamLeaderboardUpdateModel(userTeam.Id, Database);
+
+                    return PartialView("_TeamLeaderboardPartial", model);
+                }
+            }
+
+            throw new Exception("User is not logged in");
+        }
+
+        public PartialViewResult GetNeutralLeaderboardUpdate()
+        {
+            var model = new NeutralLeaderboardUpdateModel(Database);
+
+            return PartialView("_NeutralLeaderboardPartial", model);
+        }
+
         public IActionResult AnswerBank()
         {
             List<AnswerPartialViewModel> result = Database.Answers
