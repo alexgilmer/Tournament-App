@@ -66,6 +66,10 @@ namespace Tournament_App.Models.ViewModels.Puzzles
                 AnswerId = answer.Id
             };
             database.TeamAnswers.Add(ta);
+
+            var note = new Notification(userTeam, answer);
+            database.Notifications.Add(note);
+
             database.SaveChanges();
         }
     }

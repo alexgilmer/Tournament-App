@@ -1,6 +1,7 @@
 ﻿@model Tournament_App.Models.ViewModels.Home.NeutralLeaderboardViewModel
 
 <script defer src="~/js/neutralLeaderboardHandler.js" asp-append-version="true"></script>
+<script defer src="~/js/notificationHandler.js" asp-append-version="true"></script>
 
 <div class="row">
     <div class="col-8 border-end" id="partial-container">
@@ -11,6 +12,7 @@
         <h2 class="text-center">Announcements</h2>
         <div class="toast-container">
         </div>
+        <div id="notification-container"></div>
     </div>
 </div>
 

@@ -131,5 +131,17 @@ namespace Tournament_App.Controllers
 
             return View(result);
         }
+
+        public PartialViewResult GetNotifications()
+        {
+            IEnumerable<Notification> notifications = Database.Notifications
+                .OrderByDescending(n => n.Created)
+                .Take(8)
+                .ToList();
+
+            IEnumerable<NotificationViewModel> model = notifications.Select(n => new NotificationViewModel(n));
+
+            return PartialView("_NotificationListPartial", model);
+        }
     }
 }

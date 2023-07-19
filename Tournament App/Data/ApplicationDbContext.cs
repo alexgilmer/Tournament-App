@@ -10,6 +10,7 @@ namespace Tournament_App.Data
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<TeamAnswer> TeamAnswers { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -33,6 +34,9 @@ namespace Tournament_App.Data
                 .WithMany(a => a.ChildAnswers)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Notification>()
+                .HasIndex(n => n.Created);
         }
     }
 }

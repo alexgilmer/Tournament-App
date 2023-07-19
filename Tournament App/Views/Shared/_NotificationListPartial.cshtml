@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Tournament_App.Models.ViewModels.Home.NotificationViewModel>
+
+<div>
+    @foreach(var m in Model)
+    {
+        <partial name="_NotificationPartial" model="@m" />
+    }
+</div>
