@@ -1,5 +1,6 @@
 (function () {
     setInterval(updateNotifications, 5000);
+    updateNotifications();
 
     function updateNotifications() {
         $.ajax({
