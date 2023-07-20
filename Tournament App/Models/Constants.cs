@@ -18,11 +18,11 @@
             return answerRarity switch
             {
                 AnswerRarity.Common => "#FFFFFF",
-                AnswerRarity.Uncommon => "#1EFF00",
+                AnswerRarity.Uncommon => "#259D00",
                 AnswerRarity.Rare => "#065FB6",
                 AnswerRarity.Epic => "#A335EE",
                 AnswerRarity.Legendary => "#F57B01",
-                AnswerRarity.RedHerring => "#FF0000",
+                AnswerRarity.RedHerring => "#D00000",
                 _ => "#FFFFFF",
             };
         }

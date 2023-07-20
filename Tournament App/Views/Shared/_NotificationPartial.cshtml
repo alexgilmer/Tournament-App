@@ -1,7 +1,16 @@
 ﻿@model Tournament_App.Models.ViewModels.Home.NotificationViewModel
 
-<div>
-    <h3 style="background-color:@Model.Notification.HeaderColor;color:@Model.Notification.TextColor">@Model.Notification.Title</h3>
-    <p>@Model.Notification.Text</p>
-    <p>@Model.TimeString</p>
+<div class="notification-container">
+    <h5
+        class="notification-header"
+        style="background-color:@Model.Notification.HeaderColor"
+    >
+        @Model.Notification.Title
+    </h5>
+    <p class="notification-content">
+        @Model.Notification.Text
+    </p>
+    <p class="notification-time-text">
+        @Model.TimeString
+    </p>
 </div>
