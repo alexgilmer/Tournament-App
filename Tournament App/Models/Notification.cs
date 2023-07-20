@@ -12,9 +12,17 @@
         public Notification() { }
         public Notification(Team userTeam, Answer answer)
         {
-            Title = "Flag capture!";
             HeaderColor = Constants.GetRarityColor(answer.Rarity);
-            Text = $"Team {userTeam.Name} has captured {answer.Name}";
+            TextColor = Constants.GetRarityTextColor(answer.Rarity);
+            Title = "Flag capture!";
+
+            Text = $"Team {userTeam.Name} has captured: {answer.Name}";
         }
+
+        public static readonly Notification Default = new()
+        {
+            Title = "Title Text",
+            Text = "Body Text",
+        };
     }
 }

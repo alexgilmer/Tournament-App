@@ -132,5 +132,22 @@ namespace Tournament_App.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult WipeNotifications()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult WipeNotifications(WipeDataFormModel vm)
+        {
+            if (vm.Confirmed)
+            {
+                Database.Notifications.ExecuteDelete();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

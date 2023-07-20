@@ -26,5 +26,19 @@
                 _ => "#FFFFFF",
             };
         }
+
+        public static string GetRarityTextColor(AnswerRarity answerRarity)
+        {
+            return answerRarity switch
+            {
+                AnswerRarity.Common => "#000000",
+                AnswerRarity.Uncommon => "#F57B01",
+                AnswerRarity.Rare => "#F57B01",
+                AnswerRarity.Epic => "#F57B01",
+                AnswerRarity.Legendary => "#000000",
+                AnswerRarity.RedHerring => "#F57B01",
+                _ => "#000000"
+            };
+        }
     }
 }

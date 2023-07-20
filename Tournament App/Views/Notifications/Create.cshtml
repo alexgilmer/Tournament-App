@@ -1,0 +1,34 @@
+﻿
+<script defer src="/js/create-notification-helper.js" asp-append-version="true"></script>
+
+<h1>Create a new Notification</h1>
+<form method="post" asp-controller="Notifications" asp-action="Create">
+    <div class="mb-3">
+        <label for="Title">Title text</label>
+        <input type="text" id="Title" name="Title" placeholder="Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label for="Text">Body text</label>
+        <input type="text" id="Text" name="Text" placeholder="Body" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label for="HeaderColor">Header color</label>
+        <input type="color" id="HeaderColor" name="HeaderColor" class="form-control" value="#FFFFFF"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="TextColor">Header text color</label>
+        <input type="color" id="TextColor" name="TextColor" class="form-control" value="#000000"/>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+@using Tournament_App.Models
+<div id="sample-notification">
+    <h3>@Notification.Default.Title</h3>
+    <p>@Notification.Default.Title</p>
+    <p>44 seconds ago</p>
+</div>
