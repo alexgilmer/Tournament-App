@@ -16,8 +16,14 @@
     <div class="mb-3">
         <label for="HeaderColor">Header color</label>
         <input type="color" id="HeaderColor" name="HeaderColor" class="form-control" value="#FFFFFF"/>
+        @foreach(AnswerRarity r in Enum.GetValues<AnswerRarity>())
+        {
+            <button type="button" class="color-sample" data-color="@Constants.GetRarityColor(r)">@r.ToString()</button>
+        }
     </div>
 
+
+    <br />
     <button type="submit">Submit</button>
 </form>
 
