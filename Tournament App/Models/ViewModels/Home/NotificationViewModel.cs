@@ -3,6 +3,9 @@
     public class NotificationViewModel
     {
         public Notification Notification { get; set; }
+        public string Title => Notification?.Title ?? "Missing Notification Title";
+        public string Text => Notification?.Text ?? "Missing Notification Text";
+        public string HeaderColor => Notification?.HeaderColor ?? "#FFFFFF";
         public string TimeString
         {
             get
