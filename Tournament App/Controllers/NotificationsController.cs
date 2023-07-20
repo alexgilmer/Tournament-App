@@ -40,7 +40,6 @@ namespace Tournament_App.Controllers
                 Title = vm.Title ?? string.Empty,
                 Text = vm.Text ?? string.Empty,
                 HeaderColor = vm.HeaderColor ?? "#FFFFFF",
-                TextColor = vm.TextColor ?? "#000000"
             };
             Database.Notifications.Add(newNote);
             Database.SaveChanges();
