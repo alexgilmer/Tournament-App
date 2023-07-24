@@ -48,34 +48,17 @@ namespace Tournament_App.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(string id)
+        public IActionResult Delete(Guid id)
         {
-            Notification? n = Database.Notifications.FirstOrDefault(note => note.Id == Guid.Parse(id));
-
-            if (n == null)
+            Notification? result = Database.Notifications.FirstOrDefault(n => n.Id == id);
+            if (result == null)
+            {
                 return NotFound();
-
-            var vm = new EditNotificationViewModel
-            {
-                //Notification = n
-            };
-
-            return View(vm);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(EditNotificationFormModel vm)
-        {
-            Notification? n = Database.Notifications.FirstOrDefault(note => note.Id == Guid.Parse(/*vm.Id*/"  "));
-
-            if (n != null)
-            {
-                throw new NotImplementedException();
-                Database.SaveChanges();
             }
 
-            return RedirectToAction("Index", "Teams");
+            Database.Notifications.Remove(result);
+            Database.SaveChanges();
+            return RedirectToAction("Index", "Notifications");
         }
-        
     }
 }
