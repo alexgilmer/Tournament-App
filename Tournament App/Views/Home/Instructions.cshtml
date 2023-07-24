@@ -1,16 +1,21 @@
 ﻿<section>
-    <h2>Welcome, contestants, to the first-ever <strong>PTEC Hackathon!</strong></h2>
-    <p>
-        You've been divided into four teams.  Work with your team to score points. 
-        At the end of the time limit, teams will be ranked according to their cumulative scores.
-    </p>
+    <h1>Welcome, contestants, to the <strong>PTEC Hackathon!</strong></h1>
+</section>
+
+<section>
+    <h2>Tl;dr:</h2>
+    <p>You've got all day. Score more points than the other teams. </p>
 </section>
 
 <section>
     <h2>Objective</h2>
     <ul>
         <li>
-            Throughout the competition, you'll be tasked with finding "flags".
+            You've been divided into teams.  Work with your team to score points. 
+            At the end of the time limit, teams will be ranked according to their cumulative scores.
+        </li>
+        <li>
+            Throughout the competition, you'll be searching for "flags".
         </li>
         <li>
             These flags are worth varying amounts of points.
@@ -24,21 +29,33 @@
         <li>
             Flag strings come in two forms:
             <ul>
-                <li>Instructions to a puzzle will tell you that a string is a flag</li>
-                <li>Any string in the format <span style="font-family: monospace">FLAG_{TEXT}</span></li>
+                <li>
+                    Some puzzles will tell you that a string is a flag. 
+                    These strings can look like anything, but they'll usually (but not always) look like hashes. 
+                </li>
+                <li>
+                    Any string you find that starts with "FLAG" in all-caps, followed by an underscore and some text:
+                    <span style="font-family: monospace">FLAG_{TEXT}</span>
+                </li>
             </ul>
         </li>
         <li>
-            When a solved puzzle leads you to a flag, that will be worth points.
-        </li>
-        <li>
-            BEWARE: Do not randomly guess flags.
+            BEWARE!
             <ul>
                 <li>
-                    There are <strong>red herring flags that are found from incorrect solutions</strong> to puzzles.
-                </li>
-                <li>
-                    These are worth NEGATIVE POINTS.
+                    There are <strong>red herring flags</strong> out there!
+                    These are worth <strong>NEGATIVE POINTS</strong>.
+                    <ul>
+                        <li>
+                            Red herring flags are typically found as an incorrect solution to a puzzle. 
+                        </li>
+                        <li>
+                            Some of them give your team a chance to "spend" some points for a hint. 
+                        </li>
+                        <li>
+                            "<span style="font-family: monospace">FLAG_{TEXT}</span>" flags are always safe.  These ones are like "treasure chests" to encourage exploration.
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     Here's a test of your comprehension.  Here are two flags.  The second one is worth points, the first one is a red herring. 
