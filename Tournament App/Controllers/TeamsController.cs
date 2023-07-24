@@ -49,7 +49,7 @@ namespace Tournament_App.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
             Team? team = Database.Teams.Find(id);
 
