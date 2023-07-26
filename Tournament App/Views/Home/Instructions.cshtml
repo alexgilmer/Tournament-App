@@ -12,30 +12,24 @@
     <ul>
         <li>
             You've been divided into teams.  Work with your team to score points. 
-            At the end of the time limit, teams will be ranked according to their cumulative scores.
+            At the end of the time limit, the team with the most points wins.
         </li>
         <li>
-            Throughout the competition, you'll be searching for "flags".
+            Throughout the competition, you'll be searching for "flags": strings of text worth varying amounts of points.
         </li>
         <li>
-            These flags are worth varying amounts of points.
-        </li>
-        <li>
-            You can submit them on the tournament leaderboard page.
-        </li>
-        <li>
-            A flag will always be a string of text.  These strings will vary in length.
+            You can submit flags you've found on the tournament leaderboard page. 
         </li>
         <li>
             Flag strings come in two forms:
             <ul>
                 <li>
                     Some puzzles will tell you that a string is a flag. 
-                    These strings can look like anything, but they'll usually (but not always) look like hashes. 
+                    These strings can look like anything, but they'll usually (but not always) look like hashes. Example: <span style="font-family:monospace">f33d00fee385a7938dd3c30b311cf133bfab7bf58089905938cd5e67840dcfe9</span>
                 </li>
                 <li>
-                    Any string you find that starts with "FLAG" in all-caps, followed by an underscore and some text:
-                    <span style="font-family: monospace">FLAG_{TEXT}</span>
+                    Any string you find that starts with "FLAG" in all-caps, followed by an underscore and some non-whitespace text.  For example:
+                    <span style="font-family: monospace">FLAG_this_is_SPARTA</span>
                 </li>
             </ul>
         </li>
@@ -43,28 +37,22 @@
             BEWARE!
             <ul>
                 <li>
-                    There are <strong>red herring flags</strong> out there!
-                    These are worth <strong>NEGATIVE POINTS</strong>.
+                    There are <strong>NEGATIVE POINT</strong> flags out there!
                     <ul>
                         <li>
-                            Red herring flags are typically found as an incorrect solution to a puzzle. 
+                            Decoy flags are typically found as incorrect solutions to puzzles. These will cost your team for being wrong. 
                         </li>
                         <li>
-                            Some of them give your team a chance to "spend" some points for a hint. 
+                            Hint flags give your team a chance to spend some points for a hint to help solve a difficult puzzle. 
                         </li>
                         <li>
-                            "<span style="font-family: monospace">FLAG_{TEXT}</span>" flags are always safe.  These ones are like "treasure chests" to encourage exploration.
+                            "<span style="font-family: monospace">FLAG_{TEXT}</span>" flags are always safe (never negative points).
+                            These ones are like "treasure chests": gifts hidden in unusual spots to encourage exploration.
                         </li>
                     </ul>
                 </li>
                 <li>
-                    Here's a test of your comprehension.  Here are two flags.  The second one is worth points, the first one is a red herring. 
-                </li>
-                <li>
-                    Flag 1: <pre>k823bknciwe7w872</pre>
-                </li>
-                <li>
-                    Flag 2: <pre>lslfi8sern</pre>
+                    Here's a test of your comprehension.  Of the two example flags above, one is a decoy. 
                 </li>
             </ul>
         </li>
