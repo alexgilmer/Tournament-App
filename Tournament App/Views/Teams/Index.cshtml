@@ -13,6 +13,9 @@
                 Name
             </th>
             <th>
+                Api Alias
+            </th>
+            <th>
                 Functions
             </th>
         </tr>
@@ -23,6 +26,9 @@
             <tr>
                 <td>
                     @team.Name
+                </td>
+                <td>
+                    @team.ApiAlias
                 </td>
                 <td>
                     <a asp-controller="Teams" asp-action="Edit" asp-route-id="@team.Id">Edit</a> |

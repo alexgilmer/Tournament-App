@@ -4,5 +4,6 @@
     {
         public Guid TeamId { get; set; }
         public string NewTeamName { get; set; }
+        public string? NewTeamApiAlias { get; set; }
     }
 }

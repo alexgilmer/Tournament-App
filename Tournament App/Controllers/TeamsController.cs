@@ -72,6 +72,7 @@ namespace Tournament_App.Controllers
             if (team != null)
             {
                 team.Name = vm.NewTeamName;
+                team.ApiAlias = vm.NewTeamApiAlias;
                 Database.SaveChanges();
             }
 

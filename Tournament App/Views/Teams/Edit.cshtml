@@ -7,10 +7,19 @@
 
     <form method="post" asp-controller="Teams" asp-action="Edit">
         <input type="hidden" name="TeamId" value="@Model.Team.Id" />
-        <label>
-            New team name:
-            <input type="text" name="NewTeamName" placeholder="Team name" id="NewTeamName"/>
-        </label>
+        <div class="mb-3">
+            <label>
+                New team name:
+                <input type="text" name="NewTeamName" placeholder="Team name" id="NewTeamName" value="@Model.Team.Name"/>
+            </label>
+        </div>
+        <div class="mb-3">
+            <label>
+                New team Api Alias:
+                <input type="text" name="NewTeamApiAlias" placeholder="Team Api Alias" id="NewTeamApiAlias" value="@Model.Team.ApiAlias"/>
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 }
 else

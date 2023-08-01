@@ -37,6 +37,10 @@ namespace Tournament_App.Data
 
             builder.Entity<Notification>()
                 .HasIndex(n => n.Created);
+
+            builder.Entity<Team>()
+                .HasIndex(t => t.ApiAlias)
+                .IsUnique(true);
         }
     }
 }

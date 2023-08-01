@@ -5,7 +5,7 @@
         // Self properties
         public Guid Id { get; set; }
         public string Name { get; set; }
-
+        public string? ApiAlias { get; set; }
         // FK properties
 
         // Navigation properties

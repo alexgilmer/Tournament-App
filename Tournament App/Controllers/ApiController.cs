@@ -19,9 +19,14 @@ namespace Tournament_App.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddFlag([FromHeader] int teamId, [FromHeader] string flagCode)
+        public IActionResult AddFlag([FromHeader] string? teamId, [FromHeader] string flagCode)
         {
-            Team? team = Database.Teams.Find(teamId);
+            if (teamId == null)
+            {
+                return NotFound("teamId not found");
+            }
+
+            Team? team = Database.Teams.FirstOrDefault(t => t.ApiAlias == teamId);
 
             if (team == null)
             {
@@ -35,10 +40,17 @@ namespace Tournament_App.Controllers
                 return NotFound("Answer not found");
             }
 
-            if (answer.PointValue < 0)
+            var ta = new TeamAnswer
             {
-                return BadRequest("Stop trying to hurt the other teams, LOL!");
-            }
+                TeamId = team.Id,
+                AnswerId = answer.Id
+            };
+            Database.TeamAnswers.Add(ta);
+
+            var note = new Notification(team, answer);
+            Database.Notifications.Add(note);
+
+            Database.SaveChanges();
 
             return Ok();
         }
