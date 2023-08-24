@@ -31,6 +31,7 @@ namespace Tournament_App.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Response.Headers.Add("Dynamite", "FLAG_c3dd4a2670467566244ea30a9e668898c93208f2609f5a3d9c3106412ccfd479");
             return View();
         }
 
