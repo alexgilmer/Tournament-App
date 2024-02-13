@@ -74,23 +74,6 @@ namespace Tournament_App.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(Guid id)
-        {
-            var gameData = Database.GameData
-                .Include(gd => gd.TeamGameData)
-                .ThenInclude(tgd => tgd.Team)
-                .Single(gd => gd.Id == id);
-
-            return View(new EditGameDataFormModel(gameData));
-        }
-
-        [HttpPost]
-        public IActionResult Edit(EditGameDataFormModel vm)
-        {
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
         public IActionResult Download(Guid id)
         {
             var gameData = Database.GameData.Single(gd => gd.Id == id);
