@@ -65,6 +65,11 @@ namespace Tournament_App.Controllers
 
                 Database.SaveChanges();
             }
+            else
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
