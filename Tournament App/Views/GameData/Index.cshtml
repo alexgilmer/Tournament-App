@@ -22,10 +22,9 @@
                     <td>@gd.Name</td>
                     <td>@gd.Description</td>
                     <td>
-                        @foreach(TeamGameData tgd in gd.TeamGameData)
-                        {
-                            <text>@tgd.Team.Name | </text>
-                        }
+                        <text>
+                            @string.Join(" | ", gd.TeamGameData.Select(t => t.Team.Name).ToArray())
+                        </text>
                     </td>
                     <td>
                         <a asp-controller="GameData" asp-action="Edit" asp-route-id="@gd.Id">Details/Edit</a> |
