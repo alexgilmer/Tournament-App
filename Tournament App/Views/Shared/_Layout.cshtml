@@ -34,7 +34,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AnswerBank">Answer Bank</a>
                         </li>
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.AdminRole))
+                        @if (SignInManager.IsSignedIn(User) && !User.IsInRole(Constants.AdminRole))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GameData" asp-action="TeamDownloads">Team Data</a>
+                            </li>
+                        }@if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.AdminRole))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin Dashboard</a>

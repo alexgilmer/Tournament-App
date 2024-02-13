@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
@@ -12,10 +13,14 @@ namespace Tournament_App.Controllers
     public class GameDataController : Controller
     {
         private readonly ApplicationDbContext Database;
+        private readonly UserManager<ApplicationUser> UserManager;
+        private readonly SignInManager<ApplicationUser> SigninManager;
 
-        public GameDataController(ApplicationDbContext dbContext)
+        public GameDataController(ApplicationDbContext dbContext, UserManager<ApplicationUser> um, SignInManager<ApplicationUser> sim)
         {
             Database = dbContext;
+            UserManager = um;
+            SigninManager = sim;
         }
 
         public IActionResult Index()
@@ -78,13 +83,7 @@ namespace Tournament_App.Controllers
         {
             var gameData = Database.GameData.Single(gd => gd.Id == id);
 
-            string data = gameData.Data;
-            byte[] fileBytes = Encoding.UTF8.GetBytes(data);
-
-            string contentType = "text/plain";
-            string fileName = gameData.Name;
-
-            return File(fileBytes, contentType, fileName);
+            return FileDownload(gameData);
         }
 
         [HttpGet]
@@ -96,6 +95,56 @@ namespace Tournament_App.Controllers
             Database.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> TeamDownloads()
+        {
+            TeamDownloadsViewModel vm = new();
+
+            if (SigninManager.IsSignedIn(User))
+            {
+                ApplicationUser? user = await UserManager.FindByNameAsync(User.Identity?.Name);
+                Team? userTeam = Database.Teams.Find(user?.TeamId);
+                if (userTeam != null)
+                {
+                    vm.TeamName = userTeam.Name;
+                    vm.GameData = Database.TeamGameData.Include(tgd => tgd.GameData).Where(tgd => tgd.TeamId == userTeam.Id);
+                }
+            }
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> DownloadData(Guid id)
+        {
+            if (SigninManager.IsSignedIn(User))
+            {
+                ApplicationUser? user = await UserManager.FindByNameAsync(User.Identity?.Name);
+                Team? userTeam = Database.Teams.Find(user?.TeamId);
+                GameData gameData = Database.GameData.Single(gd => gd.Id == id);
+                if (userTeam != null &&
+                    Database.TeamGameData.Any(tgd => tgd.GameDataId == gameData.Id && tgd.TeamId == userTeam.Id))
+                {
+                    return FileDownload(gameData);
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        private FileContentResult FileDownload(GameData gameData)
+        {
+            string data = gameData.Data;
+            byte[] fileBytes = Encoding.UTF8.GetBytes(data);
+
+            string contentType = "text/plain";
+            string fileName = gameData.Name;
+
+            return File(fileBytes, contentType, fileName);
         }
     }
 }

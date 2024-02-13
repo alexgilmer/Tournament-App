@@ -1,0 +1,35 @@
+﻿@model Tournament_App.Models.ViewModels.GameData.TeamDownloadsViewModel
+
+@if(Model.TeamName != null)
+{
+    <h1>Downloads available for @Model.TeamName</h1>
+
+    @if(Model.GameData != null)
+    {
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>DL Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model.GameData.Select(tgd => tgd.GameData))
+                {
+                    <tr>
+                        <td>@data.Name</td>
+                        <td>@data.Description</td>
+                        <td><a asp-action="DownloadData" asp-controller="GameData" asp-route-id="@data.Id">Download</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+
+    @if(Model.GameData == null || Model.GameData.Count() == 0)
+    {
+        <p>No downloads available 🙁</p>
+    }
+}
