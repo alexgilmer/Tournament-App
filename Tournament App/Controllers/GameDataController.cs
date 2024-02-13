@@ -86,5 +86,16 @@ namespace Tournament_App.Controllers
 
             return File(fileBytes, contentType, fileName);
         }
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            var gameData = Database.GameData.Single(gd => gd.Id == id);
+
+            Database.GameData.Remove(gameData);
+            Database.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
