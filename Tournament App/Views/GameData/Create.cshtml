@@ -1,0 +1,28 @@
+﻿@model Tournament_App.Models.ViewModels.GameData.CreateGameDataFormModel
+
+<h1>Create your game data here</h1>
+
+<form id="create-game-data" enctype="multipart/form-data" method="post">
+    <div class="mb-3">
+        <label asp-for="File">Upload a file</label>
+        <input type="file" asp-for="File"/>
+        <span asp-validation-for="File"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description">Description</label>
+        <input type="text" asp-for="Description" />
+    </div>
+
+    <div class="mb-3 flex-row">
+        @foreach (Team t in ViewBag.TeamList ?? Array.Empty<Team>())
+        {
+            <div class="border-1 p-1 m-1">
+                <label for="@t.Id">@t.Name</label>
+                <input type="checkbox" value="@t.Id" name="TeamIds" id="@t.Id"/>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

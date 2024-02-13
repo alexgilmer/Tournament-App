@@ -11,6 +11,8 @@ namespace Tournament_App.Data
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<TeamAnswer> TeamAnswers { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<GameData> GameData { get; set; }
+        public virtual DbSet<TeamGameData> TeamGameData { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -41,6 +43,20 @@ namespace Tournament_App.Data
             builder.Entity<Team>()
                 .HasIndex(t => t.ApiAlias)
                 .IsUnique(true);
+
+            builder.Entity<GameData>()
+                .Property(gd => gd.Data)
+                .HasColumnType("nvarchar(max)");
+
+            builder.Entity<GameData>()
+                .HasMany(gd => gd.TeamGameData)
+                .WithOne(tgd => tgd.GameData)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<TeamGameData>()
+                .HasKey(tgd => new { tgd.TeamId, tgd.GameDataId });
+
+
         }
     }
 }

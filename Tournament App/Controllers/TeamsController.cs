@@ -79,5 +79,26 @@ namespace Tournament_App.Controllers
             return RedirectToAction("Index", "Teams");
         }
 
+        [HttpGet]
+        public IActionResult AddFileToTeam(Guid id)
+        {
+            Team? team = Database.Teams.Find(id);
+
+            if (team == null)
+                return NotFound();
+
+            var vm = new EditTeamViewModel
+            {
+                Team = team
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFileToTeam(TeamFileFormModel vm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
