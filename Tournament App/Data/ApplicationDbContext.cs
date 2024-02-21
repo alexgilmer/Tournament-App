@@ -13,6 +13,7 @@ namespace Tournament_App.Data
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<GameData> GameData { get; set; }
         public virtual DbSet<TeamGameData> TeamGameData { get; set; }
+        public virtual DbSet<FeatureControl> FeatureControls { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -56,7 +57,36 @@ namespace Tournament_App.Data
             builder.Entity<TeamGameData>()
                 .HasKey(tgd => new { tgd.TeamId, tgd.GameDataId });
 
+            builder.Entity<FeatureControl>()
+                .HasKey(ef => ef.Name)
+                .IsClustered(true);
 
+            builder.Entity<FeatureControl>()
+                .HasData(GetFeatureControls());
+        }
+
+        private static IEnumerable<FeatureControl> GetFeatureControls()
+        {
+            List<FeatureControl> features = new List<FeatureControl>
+            {
+                new FeatureControl()
+                {
+                    Name = Constants.ControlNameFlagCapture,
+                    IsEnabled = true
+                },
+                new FeatureControl()
+                {
+                    Name = Constants.ControlNameRegistration,
+                    IsEnabled = true
+                },
+                new FeatureControl()
+                {
+                    Name = Constants.ControlNamePuzzlePages,
+                    IsEnabled = true
+                }
+            };
+
+            return features;
         }
     }
 }
