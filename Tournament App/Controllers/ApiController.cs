@@ -24,7 +24,7 @@ namespace Tournament_App.Controllers
         [HttpPost]
         public IActionResult AddFlag([FromHeader] string? teamId, [FromHeader] string flagCode)
         {
-            if (!FeatureControl.IsEnabled(Constants.ControlNameFlagCapture))
+            if (!FeatureControl.IsEnabled(Constants.FeatureFlagCapture))
             {
                 return Forbid();
             }

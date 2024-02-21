@@ -71,17 +71,17 @@ namespace Tournament_App.Data
             {
                 new FeatureControl()
                 {
-                    Name = Constants.ControlNameFlagCapture,
+                    Name = Constants.FeatureFlagCapture,
                     IsEnabled = true
                 },
                 new FeatureControl()
                 {
-                    Name = Constants.ControlNameRegistration,
+                    Name = Constants.FeatureRegistration,
                     IsEnabled = true
                 },
                 new FeatureControl()
                 {
-                    Name = Constants.ControlNamePuzzlePages,
+                    Name = Constants.FeaturePuzzlePages,
                     IsEnabled = true
                 }
             };

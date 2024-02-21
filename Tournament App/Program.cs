@@ -67,7 +67,7 @@ app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments("/puzzles"), subApp =>
     subApp.Use(async (context, next) =>
     {
         IFeatureControl? fc = context.RequestServices.GetService<IFeatureControl>();
-        if (fc == null || fc.IsEnabled(Constants.ControlNamePuzzlePages))
+        if (fc == null || fc.IsEnabled(Constants.FeaturePuzzlePages))
         {
             await next();
         }

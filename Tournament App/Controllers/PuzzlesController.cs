@@ -74,7 +74,7 @@ namespace Tournament_App.Controllers
         [HttpPost]
         public async Task<JsonResult> Submit(IFormCollection formData)
         {
-            if (!FeatureControl.IsEnabled(Constants.ControlNameFlagCapture))
+            if (!FeatureControl.IsEnabled(Constants.FeatureFlagCapture))
             {
                 return Json(
                     new FlagSubmissionResult()

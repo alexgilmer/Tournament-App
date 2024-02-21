@@ -17,7 +17,7 @@ namespace Tournament_App.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            if (!_featureService.IsEnabled(Constants.ControlNamePuzzlePages))
+            if (!_featureService.IsEnabled(Constants.FeaturePuzzlePages))
             {
                 context.Response.Redirect("/FeatureDisabled");
                 return;

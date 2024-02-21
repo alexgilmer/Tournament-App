@@ -116,7 +116,7 @@ namespace Tournament_App.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (FeatureControl.IsEnabled(Constants.ControlNameRegistration))
+            if (FeatureControl.IsEnabled(Constants.FeatureRegistration))
             {
                 var teams = Database.Teams.ToList().Select(t => new SelectListItem(t.Name, t.Id.ToString())).ToList();
                 teams.Insert(0, new SelectListItem("Unassigned", ""));
@@ -139,7 +139,7 @@ namespace Tournament_App.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid && FeatureControl.IsEnabled(Constants.ControlNameRegistration))
+            if (ModelState.IsValid && FeatureControl.IsEnabled(Constants.FeatureRegistration))
             {
                 var user = CreateUser();
 
@@ -181,7 +181,7 @@ namespace Tournament_App.Areas.Identity.Pages.Account
                 }
             }
 
-            if (!FeatureControl.IsEnabled(Constants.ControlNameRegistration))
+            if (!FeatureControl.IsEnabled(Constants.FeatureRegistration))
             {
                 return RedirectToAction("Index", "Home");
             }

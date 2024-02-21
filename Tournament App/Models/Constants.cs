@@ -14,9 +14,9 @@
 
         public const string ImagePrefix = "/img/";
 
-        public const string ControlNameFlagCapture = "Flag Capture";
-        public const string ControlNameRegistration = "Registration";
-        public const string ControlNamePuzzlePages = "Puzzles";
+        public const string FeatureFlagCapture = "Flag Capture";
+        public const string FeatureRegistration = "Registration";
+        public const string FeaturePuzzlePages = "Puzzles";
 
         public static string GetRarityColor(AnswerRarity answerRarity)
         {
