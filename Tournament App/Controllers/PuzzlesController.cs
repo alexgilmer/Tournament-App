@@ -4,6 +4,7 @@ using Microsoft.Extensions.Primitives;
 using Tournament_App.Data;
 using Tournament_App.Models;
 using Tournament_App.Models.ViewModels.Puzzles;
+using Tournament_App.Services;
 
 namespace Tournament_App.Controllers
 {
@@ -19,13 +20,16 @@ namespace Tournament_App.Controllers
 
         private readonly ApplicationDbContext Database;
         private readonly UserManager<ApplicationUser> UserManager;
+        private readonly IFeatureControl FeatureControl;
 
         public PuzzlesController(
             ApplicationDbContext db,
-            UserManager<ApplicationUser> um)
+            UserManager<ApplicationUser> um,
+            IFeatureControl fc)
         {
             Database = db;
             UserManager = um;
+            FeatureControl = fc;
         }
 
         public IActionResult Index()
@@ -70,6 +74,18 @@ namespace Tournament_App.Controllers
         [HttpPost]
         public async Task<JsonResult> Submit(IFormCollection formData)
         {
+            if (!FeatureControl.IsEnabled(Constants.ControlNameFlagCapture))
+            {
+                return Json(
+                    new FlagSubmissionResult()
+                    {
+                        ValidFlag = false,
+                        AnswerName = string.Empty,
+                        PointsAwarded = 0,
+                        Message = "Flag capture is currently disabled"
+                    }
+                );
+            }
             ApplicationUser user = await UserManager.FindByNameAsync(User.Identity?.Name);
 
             FlagSubmissionResult result = new(Database, user, formData);

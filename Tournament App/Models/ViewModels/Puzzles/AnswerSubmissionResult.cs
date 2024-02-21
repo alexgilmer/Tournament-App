@@ -6,10 +6,10 @@ namespace Tournament_App.Models.ViewModels.Puzzles
 {
     public class FlagSubmissionResult
     {
-        public bool ValidFlag { get; }
-        public string AnswerName { get; }
-        public int PointsAwarded { get; }
-        public string Message { get; }
+        public bool ValidFlag { get; init;  }
+        public string AnswerName { get; init; }
+        public int PointsAwarded { get; init; }
+        public string Message { get; init; }
 
         public FlagSubmissionResult(
             ApplicationDbContext database,
@@ -72,5 +72,7 @@ namespace Tournament_App.Models.ViewModels.Puzzles
 
             database.SaveChanges();
         }
+
+        public FlagSubmissionResult() { }
     }
 }

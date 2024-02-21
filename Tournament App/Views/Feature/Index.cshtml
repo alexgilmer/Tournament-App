@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FeatureControl>
+
+<h1>Feature Index</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Enabled
+            </th>
+            <th>
+                Toggle
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var feature in Model)
+        {
+            <tr>
+                <td>
+                    @feature.Name
+                </td>
+                <td>
+                    @if(feature.IsEnabled)
+                    {
+                        <span style="color:green">Active</span>
+                    }
+                    else
+                    {
+                        <span style="color:red">Disabled</span>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Feature" asp-action="Toggle" asp-route-name="@feature.Name">Toggle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

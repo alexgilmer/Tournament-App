@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tournament_App.Data;
 using Tournament_App.Models;
+using Tournament_App.Services;
 
 namespace Tournament_App.Controllers
 {
@@ -12,15 +13,22 @@ namespace Tournament_App.Controllers
     public class ApiController : ControllerBase
     {
         private readonly ApplicationDbContext Database;
+        private readonly IFeatureControl FeatureControl;
 
-        public ApiController(ApplicationDbContext db)
+        public ApiController(ApplicationDbContext db, IFeatureControl fc)
         {
             Database = db;
+            FeatureControl = fc;
         }
 
         [HttpPost]
         public IActionResult AddFlag([FromHeader] string? teamId, [FromHeader] string flagCode)
         {
+            if (!FeatureControl.IsEnabled(Constants.ControlNameFlagCapture))
+            {
+                return Forbid();
+            }
+
             if (teamId == null)
             {
                 return NotFound("teamId not found");

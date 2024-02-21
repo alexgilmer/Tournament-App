@@ -13,6 +13,11 @@
         public const string AnswerMissingDescription = "ERROR: THIS FLAG IS MISSING A DESCRIPTION";
 
         public const string ImagePrefix = "/img/";
+
+        public const string ControlNameFlagCapture = "Flag Capture";
+        public const string ControlNameRegistration = "Registration";
+        public const string ControlNamePuzzlePages = "Puzzles";
+
         public static string GetRarityColor(AnswerRarity answerRarity)
         {
             return answerRarity switch

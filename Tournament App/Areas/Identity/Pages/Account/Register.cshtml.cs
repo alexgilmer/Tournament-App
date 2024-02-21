@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Tournament_App.Data;
 using Tournament_App.Models;
+using Tournament_App.Services;
 
 namespace Tournament_App.Areas.Identity.Pages.Account
 {
@@ -34,14 +35,15 @@ namespace Tournament_App.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext Database;
-
+        private readonly IFeatureControl FeatureControl;
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ApplicationDbContext db)
+            ApplicationDbContext db,
+            IFeatureControl fc)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -50,6 +52,7 @@ namespace Tournament_App.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             Database = db;
+            FeatureControl = fc;
         }
 
         /// <summary>
@@ -113,9 +116,20 @@ namespace Tournament_App.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            var teams = Database.Teams.ToList().Select(t => new SelectListItem(t.Name, t.Id.ToString())).ToList();
-            teams.Insert(0, new SelectListItem("Unassigned", ""));
-            TeamSelectList = teams;
+            if (FeatureControl.IsEnabled(Constants.ControlNameRegistration))
+            {
+                var teams = Database.Teams.ToList().Select(t => new SelectListItem(t.Name, t.Id.ToString())).ToList();
+                teams.Insert(0, new SelectListItem("Unassigned", ""));
+                TeamSelectList = teams;
+            }
+            else
+            {
+                var teams = new List<SelectListItem>
+                {
+                    new SelectListItem("User registration disabled by administrator", "")
+                };
+                TeamSelectList = teams;
+            }
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -125,7 +139,7 @@ namespace Tournament_App.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && FeatureControl.IsEnabled(Constants.ControlNameRegistration))
             {
                 var user = CreateUser();
 
@@ -165,6 +179,11 @@ namespace Tournament_App.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+            }
+
+            if (!FeatureControl.IsEnabled(Constants.ControlNameRegistration))
+            {
+                return RedirectToAction("Index", "Home");
             }
 
             // If we got this far, something failed, redisplay form

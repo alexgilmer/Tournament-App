@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tournament_App.Data;
+using Tournament_App.Middleware;
 using Tournament_App.Models;
+using Tournament_App.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,8 @@ builder.Services.AddAuthorization(options =>
         .RequireAuthenticatedUser()
         .Build();
 });
+
+builder.Services.AddScoped<IFeatureControl, FeatureControlLogic>();
 
 var app = builder.Build();
 
@@ -57,6 +61,24 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments("/puzzles"), subApp =>
+{
+    subApp.Use(async (context, next) =>
+    {
+        IFeatureControl? fc = context.RequestServices.GetService<IFeatureControl>();
+        if (fc == null || fc.IsEnabled(Constants.ControlNamePuzzlePages))
+        {
+            await next();
+        }
+        else
+        {
+            context.Response.Redirect("/home/FeatureDisabled");
+            return;
+        }
+    });
+});
+
 
 app.MapControllerRoute(
     name: "puzzle-catch",
