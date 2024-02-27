@@ -108,5 +108,12 @@ namespace Tournament_App.Controllers
 
             return View(vm);
         }
+
+        [HttpGet]
+        [Route(ControllerBaseRoute + "/stickthelanding")]
+        public IActionResult StickTheLanding()
+        {
+            return View();
+        }
     }
 }
