@@ -108,3 +108,15 @@ body {
 #sample-notification {
     width: 450px;
 }
+
+.s-holder {
+    margin: 0 auto;
+    width: 700px;
+    height: 175px;
+}
+
+#r-sp .carousel-item img {
+    width: 700px;
+    height: 175px;
+    object-fit: cover;
+}
