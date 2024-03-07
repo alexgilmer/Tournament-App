@@ -14,6 +14,7 @@ namespace Tournament_App.Data
         public virtual DbSet<GameData> GameData { get; set; }
         public virtual DbSet<TeamGameData> TeamGameData { get; set; }
         public virtual DbSet<FeatureControl> FeatureControls { get; set; }
+        public virtual DbSet<Banner> Banners { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

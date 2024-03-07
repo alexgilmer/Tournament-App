@@ -1,0 +1,21 @@
+﻿@using Tournament_App.Models
+@model IList<Banner>
+
+
+<div class="carousel-item active">
+    <img src="https://placekitten.com/700/175?image=1" class="d-block w-100" alt="">
+</div>
+@foreach(Banner b in Model)
+{
+    <div class="carousel-item">
+        @if(b.Link != null && b.Link.Length > 0)
+        {
+            <a href="@b.Link" target="_blank">
+                <img src="@b.FileName" class="d-block w-100" alt="">
+            </a>
+        } else
+        {
+            <img src="@b.FileName" class="d-block w-100" alt="">
+        }
+    </div>
+}

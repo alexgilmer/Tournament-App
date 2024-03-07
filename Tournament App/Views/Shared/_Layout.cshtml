@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<ApplicationUser> SignInManager
 
+@using Tournament_App.Services;
+@inject IBanner BannerService
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,15 +64,7 @@
         <div class="s-holder">
             <div id="r-sp" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://placekitten.com/700/175" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placekitten.com/700/175" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placekitten.com/700/175" class="d-block w-100" alt="...">
-                    </div>
+                    <partial name="_BannerPartial" model="BannerService.GetBanners()" />
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#r-sp" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
