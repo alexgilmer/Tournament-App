@@ -1,0 +1,15 @@
+﻿<h1>Create a new banner</h1>
+
+<form method="post" asp-controller="Banners" asp-action="Create">
+    <div class="mb-3">
+        <label for="Link">Link</label>
+        <input type="text" id="Link" name="Link"/>
+    </div>
+    
+    <div class="mb-3">
+        <label for="FileName">File Name</label>
+        <input type="text" id="FileName" name="FileName"/>
+    </div>
+
+    <input type="submit" value="Submit" />
+</form>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Banner>
+
+<h1>Banner index</h1>
+<p>
+    <a asp-controller="Banners" asp-action="Create">Create New</a>
+</p>
+
+@if(Model != null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Link
+                </th>
+                <th>
+                    File Name
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Banner b in Model)
+            {
+                <tr>
+                    <td><a href="@b.Link">Link</a>: @b.Link</td>
+                    <td>@b.FileName</td>
+                    <td><img src="@b.FileName" /></td>
+                    <td>
+                        <a asp-controller="Banners" asp-action="Delete" asp-route-Id="@b.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>Error: Data model came back null: IEnumerable&lt;Banner&gt;</h2>
+}
