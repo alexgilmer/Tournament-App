@@ -18,6 +18,8 @@ namespace Tournament_App.Controllers
         public const string ThirdIpChallengeRoute = ControllerBaseRoute + "/a398c3f0";
         public const string FourthIpChallengeRoute = ControllerBaseRoute + "/80847201";
 
+        public const string PersonFinderRoute = ControllerBaseRoute + "/fce243427b2a4";
+
         private readonly ApplicationDbContext Database;
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IFeatureControl FeatureControl;
@@ -112,6 +114,13 @@ namespace Tournament_App.Controllers
         [HttpGet]
         [Route(ControllerBaseRoute + "/stickthelanding")]
         public IActionResult StickTheLanding()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route(PersonFinderRoute)]
+        public IActionResult PersonFinder()
         {
             return View();
         }

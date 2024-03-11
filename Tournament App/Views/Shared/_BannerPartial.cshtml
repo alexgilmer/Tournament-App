@@ -1,9 +1,16 @@
 ﻿@using Tournament_App.Models.ViewModels.Banners
 @model IList<BannerPartialViewModel>
 
+@using Tournament_App.Services;
+@inject IFlagBanner FlagBanner
+
+
 <div class="carousel-item active">
-    <img src="https://placekitten.com/700/175?image=1" class="d-block w-100" alt="">
+    <a href="@FlagBanner.Link" target="_blank">
+        <img src="@FlagBanner.ImagePath" class="d-block w-100" alt="">
+    </a>
 </div>
+
 @foreach(var b in Model)
 {
     <div class="carousel-item">

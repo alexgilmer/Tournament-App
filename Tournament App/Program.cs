@@ -29,6 +29,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddScoped<IFeatureControl, FeatureControlLogic>();
 builder.Services.AddScoped<IBanner, BannerService>();
+builder.Services.AddScoped<IFlagBanner, FlagBanner>();
 
 var app = builder.Build();
 
