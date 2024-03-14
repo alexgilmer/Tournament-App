@@ -1,0 +1,64 @@
+﻿#server-response-text {
+    margin: auto 0 auto;
+}
+
+#color-indicator {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    margin: auto 10px auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+#color-indicator.no-test {
+    background-color: deepskyblue;
+}
+
+#color-indicator.in-progress {
+    background: conic-gradient(white, white, lawngreen);
+    animation-name: spinner;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 1.0s;
+}
+
+#color-indicator.fail {
+    background-color: red;
+}
+
+#color-indicator.pass {
+    background-color: lawngreen;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0)
+    }
+
+    33% {
+        transform: rotate(0.33turn)
+    }
+
+    67% {
+        transform: rotate(0.67turn)
+    }
+
+    100% {
+        transform: rotate(1.0turn)
+    }
+}
+
+.code {
+    font-family: monospace;
+}
+
+.highlighted {
+    background-color: yellow;
+}
+
+.dark {
+    color: white;
+    background-color: darkgrey;
+}

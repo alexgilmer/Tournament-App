@@ -1,0 +1,41 @@
+﻿@model CodeAnalysis.CodeAnalysisResult?
+
+<h2>Server response:</h2>
+    @if (Model == null)
+    {
+        <div class="d-flex flex-row">
+            <div id="color-indicator" class="no-test"></div>
+            <p id="server-response-text">
+                No test yet.
+            </p>
+        </div>
+    }
+    else if (Model.Passed)
+    {
+        <div class="d-flex flex-row">
+            <div id="color-indicator" class="pass"></div>
+            <p id="server-response-text">
+                @Model.Message
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex flex-row">
+            <div id="color-indicator" class="fail"></div>
+            <p id="server-response-text">
+                @Model.Message
+            </p>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.Input))
+        {
+            <h4>Program input: </h4>
+            <p>@Model.Input</p>
+
+            <h4>Expected output: </h4>
+            <p>@Model.ExpectedOutput</p>
+
+            <h4>Your code output: </h4>
+            <p>@Model.ActualOutput</p>
+        }
+    }

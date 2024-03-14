@@ -1,0 +1,63 @@
+﻿<script defer src="~/js/code-submission-handler.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/code-problem.css" asp-append-version="true" />
+
+<h1>Coding challenge: Jump Game!</h1>
+
+<div class="row justify-content-between">
+    <div class="col-md-5 border-1">
+        <h3>Description</h3>
+        <p>
+            Play a game where you need to "jump" from the start to the end of the array.
+            You start on the first index
+            (<span class="code highlighted">input[0]</span>),
+            and you win if you get the last index
+            (<span class="code highlighted">input[input.Length - 1]</span>).
+            At each position,
+            the integer in that position tells you the maximum distance you
+            are allowed to jump.  You may choose to jump any distance less
+            than or equal to that integer.  You may jump any number of times,
+            keeping in mind that your distance is limited by your position in the array.
+        <p/>
+
+        <p>
+            Given an array
+            <span class="code highlighted">input</span>
+            of integers, determine if you can win the game.
+        </p>
+        <h3>Limits</h3>
+        <p>
+            <span class="code dark">1 &lt;= input.Length &lt;= 10_000</span>
+            <br />
+            <span class="code dark">0 &lt;= input[i] &lt;= 100_000</span>
+        </p>
+        <h3>Examples</h3>
+        <p>
+            <span class="code">{ 2, 3, 1, 1, 4 } => true</span>
+            <br />
+            Start on the "2", jump to the "3" (using only 1 distance instead of 2), then jump to the "4" (using the full 3 distance).  Game over: winner.  Return true.
+        </p>
+        <p>
+            <span class="code">{ 3, 2, 1, 0, 4 } => false</span>
+            <br />
+            Start on the "3".  There are 3 possible jumps, and none of them allow you to get further than the "0".  You cannot get to the "4".  Not possible to win: return false.
+        </p>
+        <p>
+            <span class="code">{ 0 } => true</span>
+            <br />
+            You start on the winning square.  No jumps needed.  Return true. 
+        </p>
+    </div>
+
+    <div class="col-md-5 border-1">
+        <div class="mb-3">
+            <h2>Your code:</h2>
+            <form id="code-form" method="post" asp-controller="CodeProblems" asp-action="JumpGame">
+                <textarea id="code" name="code" style="width: 100%;font-family: monospace;">static bool CanJump(int[] input) {}</textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="response-container">
+            <partial name="_CodeResponsePartial" model="null" />
+        </div>
+    </div>
+</div>
