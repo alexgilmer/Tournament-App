@@ -1,0 +1,55 @@
+﻿<script defer src="~/js/code-submission-handler.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/code-problem.css" asp-append-version="true" />
+
+<h1>Coding challenge: Nesting Depth!</h1>
+
+<div class="row justify-content-between">
+    <div class="col-md-5 border-1">
+        <h3>Hackathon value: 4</h3>
+        <h3>Description</h3>
+        <p>
+            Every character in <span class="code highlighted">input</span> is a digit.  
+            Insert parentheses '(' and ')' into <span class="code highlighted">input</span>
+            so that every digit <span class="code highlighted">n</span> is wrapped in exactly
+            <span class="code highlighted">n</span> layers of parentheses.  Do so with the
+            fewest added parentheses.  You may not rearrange the order of digits in
+            <span class="code highlighted">input</span>.  
+        </p>
+
+        <p>
+            Given a string of digits <span class="code highlighted">input</span>, insert
+            additional parentheses following the above rules.  Return the resulting string. 
+        </p>
+
+        <h3>Limits</h3>
+        <p>
+            <span class="code">1 &lt;= input.Length &lt;= 100</span>
+            <br />
+            <span class="code">'0' &lt;= input[i] &lt;= '9'</span>
+        </p>
+
+        <h3>Examples</h3>
+        <p>
+            <span class="code">"111000" =&gt; "(111)000"</span>
+        </p>
+        <p>
+            <span class="code">"101" =&gt; "(1)0(1)"</span>
+        </p>
+        <p>
+            <span class="code">"3211" =&gt; "(((3)2)11)"</span>
+        </p>
+    </div>
+
+    <div class="col-md-5 border-1">
+        <div class="mb-3">
+            <h2>Your code:</h2>
+            <form id="code-form" method="post" asp-controller="CodeProblems" asp-action="NestingDepth">
+                <textarea id="code" name="code" style="width: 100%;font-family: monospace;">static string NestingDepth(string input) {}</textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="response-container">
+            <partial name="_CodeResponsePartial" model="null" />
+        </div>
+    </div>
+</div>
