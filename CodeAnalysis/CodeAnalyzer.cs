@@ -14,6 +14,8 @@ public static class CodeAnalyzer
         return problem switch
         {
             CodeProblem.JumpGame => new JumpGameAnalyzer().GetResult(code),
+            CodeProblem.BallCountingEasy => new BallCountingAnalyzer(isEasyMode: true).GetResult(code),
+            CodeProblem.BallCounting => new BallCountingAnalyzer(isEasyMode: false).GetResult(code),
             _ => throw new InvalidOperationException()
         };
     }
@@ -22,5 +24,7 @@ public static class CodeAnalyzer
 public enum CodeProblem
 {
     JumpGame,
+    BallCountingEasy,
+    BallCounting,
     None
 }

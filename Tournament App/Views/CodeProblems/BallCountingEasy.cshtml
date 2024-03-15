@@ -1,0 +1,58 @@
+﻿<script defer src="~/js/code-submission-handler.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/code-problem.css" asp-append-version="true" />
+
+<h1>Coding challenge: Ball Counting <span class="easy-mode">EASY MODE</span></h1>
+
+<div class="row justify-content-between">
+    <div class="col-md-5 border-1">
+        <h3>Description</h3>
+        <p>
+            You have a box (of infinite capacity) and a supply of balls that are numbered from one to
+            <span class="code highlighted">num</span>.  As you count upwards through those balls,
+            you place that ball into the box.  If that ball's number is a perfect square, then you
+            also find the ball with the square root of that number and remove it from the box. After
+            counting through all of the balls, how many remain in the box?
+        </p>
+
+        <p>
+            Given the process described above, determine how many balls remain in the box for a given
+            input <span class="code highlighted">num</span>. 
+        </p>
+
+        <h3>Limits</h3>
+        <p>
+            <span class="code">1 &lt;= num &lt;= 10_000</span>
+        </p>
+
+        <h3>Examples</h3>
+        <p>
+            <span class="code">10 =&gt; 7</span>
+            <br />
+            Ball 1 goes in.  1 is a square, so sqrt(1) comes out: 0 balls in the box. 
+            Balls 2 &amp; 3 go in. 
+            Ball 4 goes in.  4 is a square, so sqrt(4) comes out: 2 balls in the box. 
+            Balls 5 through 8 go in. 
+            Ball 9 goes in: 9 is a square, so sqrt(9) comes out: 6 balls in the box. 
+            Ball 10 goes in.  7 balls remain.  
+        </p>
+        <p>
+            <span class="code">60 =&gt; 53</span>
+        </p>
+        <p>
+            <span class="code">130 =&gt; 119</span>
+        </p>
+    </div>
+
+    <div class="col-md-5 border-1">
+        <div class="mb-3">
+            <h2>Your code:</h2>
+            <form id="code-form" method="post" asp-controller="CodeProblems" asp-action="BallCountingEasy">
+                <textarea id="code" name="code" style="width: 100%;font-family: monospace;">static BigInteger CountBalls(BigInteger num) {}</textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="response-container">
+            <partial name="_CodeResponsePartial" model="null" />
+        </div>
+    </div>
+</div>

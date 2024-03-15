@@ -62,3 +62,19 @@
     color: white;
     background-color: darkgrey;
 }
+
+.easy-mode {
+    color: darkcyan;
+}
+
+.easy-mode:before {
+    content: "<";
+}
+
+.easy-mode:after {
+    content: ">";
+}
+
+.hard-mode {
+    color: red;
+}
