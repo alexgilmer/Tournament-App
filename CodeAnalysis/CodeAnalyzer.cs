@@ -16,6 +16,7 @@ public static class CodeAnalyzer
             CodeProblem.JumpGame => new JumpGameAnalyzer().GetResult(code),
             CodeProblem.BallCountingEasy => new BallCountingAnalyzer(isEasyMode: true).GetResult(code),
             CodeProblem.BallCounting => new BallCountingAnalyzer(isEasyMode: false).GetResult(code),
+            CodeProblem.NestingDepth => new NestingDepthAnalyzer().GetResult(code),
             _ => throw new InvalidOperationException()
         };
     }
