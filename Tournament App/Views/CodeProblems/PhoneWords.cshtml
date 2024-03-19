@@ -1,0 +1,74 @@
+﻿<script defer src="~/js/code-submission-handler.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/code-problem.css" asp-append-version="true" />
+
+<h1>Coding challenge: Phone Words!</h1>
+
+<div class="row justify-content-between">
+    <div class="col-md-5 border-1">
+        <h3>Hackathon value: 6</h3>
+        <h3>Description</h3>
+        <p>
+            The numbers on a phone (2 - 9) can be used to represent letters.
+            The number 2 maps to "a", "b", or "c", 3 maps to "d", "e", or "f",
+            and so on.  Given a string of input digits, assemble a list of every
+            possible sequence of letters that could be made with those numbers.
+        </p>
+
+        <p>
+            Given a string <span class="code highlighted">input</span>, determine
+            and return the list of every possible sequence of letters you could make
+            using those numbers as input into a phone. 
+            <span class="highlighted">
+                The judging algorithm doesn't care about the order
+                of the outputs.  You can put them in any order. 
+            </span>
+        </p>
+
+        <h3>Limits</h3>
+        <p>
+            <span class="code">0 &lt;= input.Length &lt;= 4</span>
+            <br />
+            <span class="code">'2' &lt;= input[i] &lt;= '9'</span>
+        </p>
+
+        <h3>Special information</h3>
+        <p>
+            Here is a list of all the digit mappings, in case an image of phone buttons isn't immediately available.
+            <br />
+            <pre>
+                { 2, "abc" },
+                { 3, "def" },
+                { 4, "ghi" },
+                { 5, "jkl" },
+                { 6, "mno" },
+                { 7, "pqrs" },
+                { 8, "tuv" },
+                { 9, "wxyz" }
+            </pre>
+        </p>
+
+        <h3>Examples</h3>
+        <p>
+            <span class="code">"23" =&gt; { "ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf" }</span>
+        </p>
+        <p>
+            <span class="code">"" =&gt; { }</span>
+        </p>
+        <p>
+            <span class="code">"9" =&gt; { "w", "x", "y", "z" }</span>
+        </p>
+    </div>
+
+    <div class="col-md-5 border-1">
+        <div class="mb-3">
+            <h2>Your code:</h2>
+            <form id="code-form" method="post">
+                <textarea id="code" name="code" style="width: 100%;font-family: monospace;">static IList&lt;string&gt; PhoneWords(string input) {}</textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="response-container">
+            <partial name="_CodeResponsePartial" model="null" />
+        </div>
+    </div>
+</div>

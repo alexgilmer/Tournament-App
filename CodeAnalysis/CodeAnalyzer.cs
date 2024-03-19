@@ -18,6 +18,7 @@ public static class CodeAnalyzer
             CodeProblem.BallCounting => new BallCountingAnalyzer(isEasyMode: false).GetResult(code),
             CodeProblem.NestingDepth => new NestingDepthAnalyzer().GetResult(code),
             CodeProblem.AverageBases => new AverageBasesAnalyzer().GetResult(code),
+            CodeProblem.PhoneWords => new PhoneWordsAnalyzer().GetResult(code),
             _ => throw new InvalidOperationException()
         };
     }
@@ -30,5 +31,5 @@ public enum CodeProblem
     BallCounting,
     NestingDepth,
     AverageBases,
-    None
+    PhoneWords
 }
