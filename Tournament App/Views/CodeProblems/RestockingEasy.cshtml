@@ -1,0 +1,102 @@
+﻿<script defer src="~/js/code-submission-handler.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/code-problem.css" asp-append-version="true" />
+
+<h1>Coding challenge: Restocking <span class="easy-mode">EASY MODE</span></h1>
+
+<div class="row justify-content-between">
+    <div class="col-md-5 border-1">
+        <h3>Hackathon value: 2</h3>
+        <h3>Description</h3>
+        <p>
+            You wish to make a bulk purchase of some object. You must purchase exactly
+            <span class="code highlighted">numberToBuy</span> of them. The source from which
+            you must buy them has a collection of prices for different bulk quantities. 
+            For example, <span class="code">{{1, 1.99m}, {4, 4.99m}}</span> would mean that
+            it costs 1.99 to purchase them individually, or 4.99 for a 4-pack. 
+        </p>
+
+        <p>
+            Given a list of prices <span class="code highlighted">prices</span> and a
+            number of items to buy <span class="code highlighted">numberToBuy</span>, determine
+            the <em>lowest possible price</em> it would cost to buy <em>exactly</em>
+            <span class="code highlighted">numberToBuy</span> of them. 
+        </p>
+
+        <h3>Limits</h3>
+        <p>
+            <span class="code">0 &lt;= numberToBuy &lt;= 1000</span>
+            <br />
+            All prices will be defined with a maximum of two decimal places. 
+            <br />
+            <span class="code">1 &lt;= prices.Count() &lt;= 10</span>
+            <br />
+            It is guaranteed that some combination of bulks will result in precisely fulfilling 
+            <span class="code highlighted">numberToBuy</span>. 
+            <br />
+            For any given {quantity, cost} price:
+            <br />
+            <span class="code">1 &lt;= quantity &lt;= 1000</span>
+            <br />
+            <span class="code">0.01 &lt;= cost &lt;= 1000.00</span>
+            <br />
+            Bulk quantities and their costs will adhere to ordinary standards: Quantities will be
+            arranged into convenient multiples, including a single-buy option. Costs will get
+            more efficient with increased bulk size, meaning it will always be cheaper to buy a
+            single instance of a large bulk (a 20-pack, for example) than to buy multiple copies
+            of a smaller one that adds up to the same quantity (buy four 5-packs, for example). 
+        </p>
+
+        <h3>Examples</h3>
+        <p>
+<pre>numberToBuy = 5;
+prices = {
+    {1, 1.99m},
+    {4, 4.99m}
+};</pre>
+            return: 6.98.  It is cheaper to buy the 4-pack plus a single.  5 singles would cost 9.95. 
+        </p>
+        <p>
+<pre>numberToBuy = 444;
+prices = {
+  {1, 0.49m},
+  {5, 2.20m},
+  {10, 3.99m},
+  {50, 18.99m},
+  {100, 35.99m}
+};
+</pre>
+            return: 161.88.  The optimal combination is four 100-packs, four 10-packs, and 4 singles. 
+        </p>
+
+        <p>
+<pre>numberToBuy = 0;
+prices = {
+  {1, 1.49m},
+  {2, 2.89m},
+  {4, 5.74m},
+  {8, 11.22m},
+  {16, 21.99m},
+  {32, 39.99m},
+  {64, 74.99m},
+  {128, 140.00m},
+  {256, 274.99m},
+  {512, 512.00m}
+}
+</pre>
+            return: 0.  You don't need to buy anything, because numberToBuy is zero. 
+        </p>
+    </div>
+
+    <div class="col-md-5 border-1">
+        <div class="mb-3">
+            <h2>Your code:</h2>
+            <form id="code-form" method="post">
+                <textarea id="code" name="code" style="width: 100%;font-family: monospace;">static decimal Restock(int numberToBuy, Dictionary&lt;int, decimal&gt; prices) {}</textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="response-container">
+            <partial name="_CodeResponsePartial" model="null" />
+        </div>
+    </div>
+</div>

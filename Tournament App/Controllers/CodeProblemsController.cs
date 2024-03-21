@@ -11,6 +11,9 @@ namespace Tournament_App.Controllers
         public const string NestingDepthRoute = ControllerBaseRoute + "/nesting-depth-04ec6c37b7c3f425c47ae5cec47ef96e";
         public const string AverageBasesRoute = ControllerBaseRoute + "/average-bases-56ad4f5199a51571f997a3a0e7ba6cda";
         public const string PhoneWordsRoute = ControllerBaseRoute + "/phone-words-829b2456e90a09d9471066bf755b12b7";
+        public const string TextJustificationRoute = ControllerBaseRoute + "/text-justification-c2a0b48bc2ed87a926982d75d64bb960";
+        public const string RestockingEasyRoute = ControllerBaseRoute + "/restocking-easy-7f2001ba2be0e5f3dc7eb74101a8d2d4";
+        public const string RestockingRoute = ControllerBaseRoute + "/restocking-b3e447d68b22122b9796746c0b7241d0";
 
         [HttpGet]
         public IActionResult Index()
@@ -105,6 +108,51 @@ namespace Tournament_App.Controllers
         public PartialViewResult PhoneWords(string code)
         {
             CodeAnalysisResult result = CodeAnalyzer.GetTestResult(CodeProblem.PhoneWords, code);
+            return PartialView("_CodeResponsePartial", result);
+        }
+
+        [HttpGet]
+        [Route(TextJustificationRoute)]
+        public IActionResult TextJustification()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route(TextJustificationRoute)]
+        public PartialViewResult TextJustification(string code)
+        {
+            CodeAnalysisResult result = CodeAnalyzer.GetTestResult(CodeProblem.TextJustification, code);
+            return PartialView("_CodeResponsePartial", result);
+        }
+
+        [HttpGet]
+        [Route(RestockingEasyRoute)]
+        public IActionResult RestockingEasy()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route(RestockingEasyRoute)]
+        public PartialViewResult RestockingEasy(string code)
+        {
+            CodeAnalysisResult result = CodeAnalyzer.GetTestResult(CodeProblem.RestockingEasy, code);
+            return PartialView("_CodeResponsePartial", result);
+        }
+
+        [HttpGet]
+        [Route(RestockingRoute)]
+        public IActionResult Restocking()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route(RestockingRoute)]
+        public PartialViewResult Restocking(string code)
+        {
+            CodeAnalysisResult result = CodeAnalyzer.GetTestResult(CodeProblem.Restocking, code);
             return PartialView("_CodeResponsePartial", result);
         }
     }

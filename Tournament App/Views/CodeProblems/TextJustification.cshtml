@@ -1,0 +1,80 @@
+﻿<script defer src="~/js/code-submission-handler.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/code-problem.css" asp-append-version="true" />
+
+<h1>Coding challenge: Text Justification!</h1>
+
+<div class="row justify-content-between">
+    <div class="col-md-5 border-1">
+        <h3>Hackathon value: 14</h3>
+        <h3>Description</h3>
+        <p>
+            Your job is to format news articles for printing in a newspaper.  
+            Newspaper columns have a maximum width <span class="code highlighted">maxLength</span>
+            into which you must fit each of your rows of text.  Your job is to "justify"
+            the text so that every row is EXACTLY <span class="code highlighted">maxLength</span>
+            long.  For rows that can fit only one word, you pad extra spaces at the end of that row. 
+            For rows with multiple words, you pad the spaces as evenly as possible between the words. 
+        </p>
+
+        <p>
+
+            Given a string <span class="code highlighted">text</span> and integer
+            <span class="code highlighted">maxLength</span>, return a list of rows of text
+            (that are all exactly <span class="code highlighted">maxLength</span> long) that contain
+            all of the initial text, spaced out as described above. 
+        </p>
+
+        <p>
+            Special note: When inserting extra spaces into rows, there may come times when these spaces
+            do not divide evenly.  For example, you may have 14 spaces to insert, and only 4 gaps for
+            insertion.  When this is the case, you first evenly divide as closely as possible (using 12 spaces
+            evenly across all 4 gaps), then with the remaining <span class="code">n</span> spaces, insert 
+            them into the first <span class="code">n</span> word gaps. Thus, the spaces would be divided 4-4-3-3. 
+        </p>
+
+        <h3>Limits</h3>
+        <p>
+            <span class="code">1 &lt;= text.Length &lt;= 1000</span>
+            <br />
+            <span class="code">1 &lt;= maxLength &lt;= 100</span>
+            <br />
+            <span class="code highlighted">text</span> will be composed of alphanumeric
+            characters, spaces, and punctuation.  There will never be two spaces side-by-side. Each "word"
+            (all of the characters between any two given spaces) will always be of equal or shorter length than
+            <span class="code highlighted">maxLength</span>. 
+        </p>
+
+        <h3>Examples</h3>
+        <p>
+            <span class="code">{ "This is an example of text justification.", 16 } =&gt;</span>
+            <br />
+<pre>"This    is    an"
+"example  of text"
+"justification.  "</pre>
+        </p>
+
+        <p>
+            <span class="code">{ "Science is what we understand well enough to explain to a computer. Art is everything else we do", 20 } =&gt;</span>
+            <br />
+<pre>"Science  is  what we"
+"understand      well"
+"enough to explain to"
+"a  computer.  Art is"
+"everything  else  we"
+"do                  "</pre>
+        </p>
+    </div>
+
+    <div class="col-md-5 border-1">
+        <div class="mb-3">
+            <h2>Your code:</h2>
+            <form id="code-form" method="post">
+                <textarea id="code" name="code" style="width: 100%;font-family: monospace;">static IList&lt;string&gt; JustifyText(string text, int maxLength) {}</textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="response-container">
+            <partial name="_CodeResponsePartial" model="null" />
+        </div>
+    </div>
+</div>
