@@ -11,7 +11,7 @@ namespace Tournament_App.Services
 
     public class FlagBanner : IFlagBanner
     {
-        public string ImagePath => Constants.ImagePrefix + "Hackathon-Banner.jpeg";
+        public string ImagePath => Constants.ImagePrefix + "Hackathon-Banner.jpg";
         public string Link => PuzzlesController.PersonFinderRoute;
     }
 }
