@@ -30,12 +30,12 @@
         @if (!string.IsNullOrWhiteSpace(Model.Input))
         {
             <h4>Program input: </h4>
-            <p>@Model.Input</p>
+            <p class="code">@Model.Input</p>
 
             <h4>Expected output: </h4>
-            <p>@Model.ExpectedOutput</p>
+            <p class="code">@Model.ExpectedOutput</p>
 
             <h4>Your code output: </h4>
-            <p>@Model.ActualOutput</p>
+            <p class="code">@Model.ActualOutput</p>
         }
     }
