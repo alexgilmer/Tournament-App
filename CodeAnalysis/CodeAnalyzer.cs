@@ -22,6 +22,7 @@ public static class CodeAnalyzer
             CodeProblem.TextJustification => new TextJustificationAnalyzer().GetResult(code),
             CodeProblem.RestockingEasy => new RestockingAnalyzer(isEasyMode: true).GetResult(code),
             CodeProblem.Restocking => new RestockingAnalyzer(isEasyMode: false).GetResult(code),
+            CodeProblem.AppendSort => new AppendSortAnalyzer().GetResult(code),
             _ => throw new InvalidOperationException()
         };
     }
@@ -37,5 +38,6 @@ public enum CodeProblem
     PhoneWords,
     TextJustification,
     RestockingEasy,
-    Restocking
+    Restocking,
+    AppendSort
 }

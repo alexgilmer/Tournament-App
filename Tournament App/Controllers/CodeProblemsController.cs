@@ -14,6 +14,7 @@ namespace Tournament_App.Controllers
         public const string TextJustificationRoute = ControllerBaseRoute + "/text-justification-c2a0b48bc2ed87a926982d75d64bb960";
         public const string RestockingEasyRoute = ControllerBaseRoute + "/restocking-easy-7f2001ba2be0e5f3dc7eb74101a8d2d4";
         public const string RestockingRoute = ControllerBaseRoute + "/restocking-b3e447d68b22122b9796746c0b7241d0";
+        public const string AppendSortRoute = ControllerBaseRoute + "/append-sort-ca70ccd19d98d463f281f7ce50d1c8d2";
 
         [HttpGet]
         public IActionResult Index()
@@ -153,6 +154,21 @@ namespace Tournament_App.Controllers
         public PartialViewResult Restocking(string code)
         {
             CodeAnalysisResult result = CodeAnalyzer.GetTestResult(CodeProblem.Restocking, code);
+            return PartialView("_CodeResponsePartial", result);
+        }
+
+        [HttpGet]
+        [Route(AppendSortRoute)]
+        public IActionResult AppendSort()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route(AppendSortRoute)]
+        public PartialViewResult AppendSort(string code)
+        {
+            CodeAnalysisResult result = CodeAnalyzer.GetTestResult(CodeProblem.AppendSort, code);
             return PartialView("_CodeResponsePartial", result);
         }
     }

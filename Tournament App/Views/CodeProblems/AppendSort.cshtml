@@ -1,0 +1,60 @@
+﻿<script defer src="~/js/code-submission-handler.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/code-problem.css" asp-append-version="true" />
+
+<h1>Coding challenge: Average Bases!</h1>
+
+<div class="row justify-content-between">
+    <div class="col-md-5 border-1">
+        <h3>Hackathon value: 16</h3>
+        <h3>Description</h3>
+        <p>
+            You are to "sort" <span class="code highlighted">nums</span> into strictly-ascending
+            order (meaning that no two values are identical).  You accomplish this NOT by
+            rearranging the values, but instead by appending additional digits to the end
+            of the individual numbers to make them larger. 
+        </p>
+
+        <p>
+            Given an input list of integers <span class="code highlighted">nums</span>, determine
+            the smallest amount of extra digits it would take the "sort" the list, using the above
+            instructions. 
+        </p>
+
+        <h3>Limits</h3>
+        <p>
+            <span class="code">1 &lt;= nums[i] &lt;= int.MaxValue</span>
+            <br />
+            <span class="code">3 &lt;= nums.Count() &lt;= 10_000</span>
+        </p>
+
+        <h3>Examples</h3>
+        <p>
+            <span class="code">{ 17, 4, 3 } => 3</span>
+            <br />
+            It takes at least 3 appended digits to get this list into order.  One way to accomplish this
+            would be to add a "4" to the end of the second number (turning it into "44"), then adding "51"
+            to the end of the third number (turning it into "351").  This would result in "17, 44, 351", 
+            which is in ascending order. 
+        </p>
+
+        <p>
+            <span class="code">{ 12, 13, 154, 15 } => 1</span>
+            <br />
+            This list is almost in order.  You only need to add one more digit to finish this list. 
+            Adding an "8" to the end of the last item makes it large enough to satisfy our requirements. 
+        </p>
+    </div>
+
+    <div class="col-md-5 border-1">
+        <div class="mb-3">
+            <h2>Your code:</h2>
+            <form id="code-form" method="post">
+                <textarea id="code" name="code" style="width: 100%;font-family: monospace;">static int AppendSort(IList&lt;int&gt; nums) {}</textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="response-container">
+            <partial name="_CodeResponsePartial" model="null" />
+        </div>
+    </div>
+</div>
