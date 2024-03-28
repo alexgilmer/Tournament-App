@@ -117,6 +117,10 @@ namespace Tournament_App.Controllers
             if (wipePreviousData)
             {
                 Database.Teams.RemoveRange(Database.Teams);
+                Database.ApplicationUsers.RemoveRange(
+                    Database.ApplicationUsers.Where(u => u.UserName != "alex.gilmer@mitt.ca")
+                    );
+                await Database.SaveChangesAsync();
             }
 
             TeamFromJson[]? parsedJson = JsonConvert.DeserializeObject<TeamFromJson[]>(input);
