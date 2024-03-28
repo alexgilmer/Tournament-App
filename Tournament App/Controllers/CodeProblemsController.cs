@@ -23,6 +23,12 @@ namespace Tournament_App.Controllers
         }
 
         [HttpGet]
+        public IActionResult FAQ()
+        {
+            return View();
+        }
+
+        [HttpGet]
         [Route(JumpGameRoute)]
         public IActionResult JumpGame()
         {
