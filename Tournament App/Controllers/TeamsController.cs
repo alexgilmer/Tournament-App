@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Tournament_App.Data;
 using Tournament_App.Models;
+using Tournament_App.Models.ProcessingModels;
 using Tournament_App.Models.ViewModels.Admin;
 using Tournament_App.Models.ViewModels.Teams;
 
@@ -12,10 +15,11 @@ namespace Tournament_App.Controllers
     public class TeamsController : Controller
     {
         private ApplicationDbContext Database { get; }
-
-        public TeamsController(ApplicationDbContext db)
+        private UserManager<ApplicationUser> UserManager { get; }
+        public TeamsController(ApplicationDbContext db, UserManager<ApplicationUser> um)
         {
             Database = db;
+            UserManager = um;
         }
 
         public IActionResult Index()
@@ -99,6 +103,62 @@ namespace Tournament_App.Controllers
         public async Task<IActionResult> AddFileToTeam(TeamFileFormModel vm)
         {
             throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        public IActionResult CreateMany()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMany(string input, bool wipePreviousData)
+        {
+            if (wipePreviousData)
+            {
+                Database.Teams.RemoveRange(Database.Teams);
+            }
+
+            TeamFromJson[]? parsedJson = JsonConvert.DeserializeObject<TeamFromJson[]>(input);
+
+            if (parsedJson != null)
+            {
+                foreach (var teamJson in parsedJson)
+                {
+                    Team t = new()
+                    {
+                        Name = teamJson.teamName,
+                        ApiAlias = teamJson.apiAlias
+                    };
+
+                    List<ApplicationUser> teamMembers = new();
+
+                    foreach (var memberJson in teamJson.members)
+                    {
+                        ApplicationUser u = new()
+                        {
+                            UserName = memberJson.username
+                        };
+                        var result = await UserManager.CreateAsync(u, memberJson.password);
+                        
+                        if (result.Succeeded)
+                        {
+                            teamMembers.Add(u);
+                        }
+                        else
+                        {
+                            throw new Exception($"Failed to create user due to errors: [ {string.Join(", ", result.Errors.Select(e => e.Description))} ]");
+                        }
+                    }
+
+                    t.ApplicationUsers = teamMembers;
+                    Database.Teams.Add(t);
+                }
+
+                Database.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
