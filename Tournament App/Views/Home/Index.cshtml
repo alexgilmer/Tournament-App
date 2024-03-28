@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<ApplicationUser> SignInManager
+@inject Tournament_App.Services.IFeatureControl FeatureControl
+
 
 @{
     ViewData["Title"] = "Home Page";
@@ -26,11 +28,23 @@
 
     @if (!SignInManager.IsSignedIn(User))
     {
-        <a class="d-block m-3" asp-area="Identity" asp-page="/Account/Register">
+        if (FeatureControl.IsEnabled(Constants.FeatureRegistration))
+        {
+            <a class="d-block m-3" asp-area="Identity" asp-page="/Account/Register">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/img/Register.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Register to participate</h5>
+                    </div>
+                </div>
+            </a>
+        }
+
+        <a class="d-block m-3" asp-area="Identity" asp-page="/Account/Login">
             <div class="card" style="width: 18rem;">
-                <img src="~/img/Register.jpeg" class="card-img-top" alt="...">
+                <img src="~/img/login.jpeg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Register to participate</h5>
+                    <h5 class="card-title">Log in</h5>
                 </div>
             </div>
         </a>
