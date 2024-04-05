@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
+using System.Text.RegularExpressions;
 using Tournament_App.Data;
 using Tournament_App.Models;
 using Tournament_App.Models.ViewModels.Puzzles;
@@ -18,7 +19,8 @@ namespace Tournament_App.Controllers
         public const string ThirdIpChallengeRoute = ControllerBaseRoute + "/a398c3f0";
         public const string FourthIpChallengeRoute = ControllerBaseRoute + "/80847201";
 
-        public const string PersonFinderRoute = ControllerBaseRoute + "/fce243427b2a4";
+        public const string PersonFinderRoute = ControllerBaseRoute + "/person-finder-fce243427b2a4";
+        public const string PersonFinderSolutionRoute = ControllerBaseRoute + "person-finder-solution-e007d63a3d0ecee84ea9683b2f92ec14a7e20c92";
 
         private readonly ApplicationDbContext Database;
         private readonly UserManager<ApplicationUser> UserManager;
@@ -121,6 +123,25 @@ namespace Tournament_App.Controllers
         [HttpGet]
         [Route(PersonFinderRoute)]
         public IActionResult PersonFinder()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route(PersonFinderRoute)]
+        public IActionResult PersonFinder(string? submission)
+        {
+            submission ??= "";
+            bool answerIsCorrect = Regex.IsMatch(submission, "the bull (and|&) finch pub", RegexOptions.IgnoreCase);
+
+            if (answerIsCorrect)
+                return RedirectToAction("PersonFinderSolution");
+            else
+                return RedirectToAction("PersonFinder");
+        }
+
+        [HttpGet, Route(PersonFinderSolutionRoute)]
+        public IActionResult PersonFinderSolution()
         {
             return View();
         }

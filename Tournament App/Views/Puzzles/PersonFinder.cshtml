@@ -1,1 +1,14 @@
-﻿<h1>PERSON FINDER PAGE</h1>
+﻿<h1></h1>
+
+<form asp-controller="Puzzles" asp-action="PersonFinder" method="post">
+    <figure class="container d-flex flex-column align-items-center">
+        <img src="/img/somewhere.jpg" style="object-fit:cover;width:100%" />
+        <label class="text-center w-50 mt-3">
+            <figcaption class="h2">
+                Where is this?
+            </figcaption>
+            <input type="text" name="submission" id="submission" placeholder="Answer..." class="w-100 text"/>
+        </label>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </figure>
+</form>
