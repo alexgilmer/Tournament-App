@@ -48,6 +48,11 @@ namespace Tournament_App.Controllers
                 return NotFound("Answer not found");
             }
 
+            if (Database.TeamAnswers.Any(ta => ta.TeamId == team.Id && ta.AnswerId == answer.Id))
+            {
+                return Ok("Team already has that flag.");
+            }
+
             var ta = new TeamAnswer
             {
                 TeamId = team.Id,
@@ -56,6 +61,7 @@ namespace Tournament_App.Controllers
             Database.TeamAnswers.Add(ta);
 
             var note = new Notification(team, answer);
+
             Database.Notifications.Add(note);
 
             Database.SaveChanges();
