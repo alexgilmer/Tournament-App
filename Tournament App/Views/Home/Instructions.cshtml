@@ -70,63 +70,48 @@
 <section>
     <h2>The First Task</h2>
     <ul>
-        <li>You must RDP into a computer at this IP address:  10.23.6.2</li>
-        <li>It will only allow RDP access from 4 specific IP addresses</li>
-        <li>In order to obtain one of those addresses, you will need a combination of NSA and SD expertise</li>
-    </ul>
-    <article>
-        <h2>
-            NSA task
-        </h2>
-        <p>
-            Starting from 172.16.0.0 /12
-            Networks must be created to fit the following criteria:
+        <li>Download your OVPN configuration file.  There should be a link at the top.</li>
+        <li>Connecting to OVPN will place you into your own special VPN network (10.64.172.0/25).</li>
+        <li>Your copy of the Hackathon network is the neighbouring /25 network.</li>
+        <li>
+            Find "Thomas Anderson's PC" in the Hackathon network. 
             <ul>
                 <li>
-                    Faculty PCs need 952 useable IP addresses
-                </li>
-                <li>
-                    Lab PCs need 42,064 useable IP addresses
-                </li>
-                <li>
-                    Server PCs need 283 useable IP addresses
-                </li>
-                <li>
-                    Guest PCs need 32,767 useable IP addresses
-                </li>
-                <li>
-                    Student PCs need 100,100 usable IP addresses
-                </li>
-                <li>
-                    Your target subnet requires 254 useable IP addresses
+                    This PC has 5 registered users.  5 different user names, one password. 
                 </li>
             </ul>
+        </li>
+    </ul>
+
+    <article>
+        <h3>
+            NSA task
+        </h3>
+        <p>
+            The "one password" that all 5 users share into Thomas Anderson's PC is encrypted:  
+            <span style="font-family:monospace;color:red;">022F145304080A730164081A0E161E462D162F2A</span>.
+            Unfortunately, Cisco's type 7 password encryption isn't the strongest...
         </p>
     </article>
 
     <article>
-        <h2>
+        <h3>
             SD Task
-        </h2>
+        </h3>
         <p>
-            Solve one of the 4 following puzzles for an IP address chunk.  The 4th one is the easiest!
+            There are 5 users, and you need to find all 5 usernames.  They are hidden on this page.  
         </p>
-        <ul>
-            <li>
-                <a asp-controller="Puzzles" asp-action="IpChallenge1">Link 1</a>
-            </li>
-            <li>
-                <a asp-controller="Puzzles" asp-action="IpChallenge2">Link 2</a>
-            </li>
-            <li>
-                <a asp-controller="Puzzles" asp-action="IpChallenge3">Link 3</a>
-            </li>
-            <li style="display: none">
-                <a asp-controller="Puzzles" asp-action="IpChallenge4">Link 4</a>
-            </li>
-            <li>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Link 5</a>
-            </li>
-        </ul>
+    </article>
+
+    <article style="display:none;" data-usernames="true">
+        <div style="display:none;">
+            <!--
+                metacortex\MaxDebugging
+                metacortex\SarahSoftware
+                metacortex\AlexCoder
+                metacortex\EmilyDevOps
+                metacortex\JakeScripter
+            -->
+        </div>
     </article>
 </section>
