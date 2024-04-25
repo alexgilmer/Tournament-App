@@ -84,6 +84,11 @@ namespace Tournament_App.Data
                 {
                     Name = Constants.FeaturePuzzlePages,
                     IsEnabled = true
+                },
+                new FeatureControl()
+                {
+                    Name = Constants.FeatureAnswerBank,
+                    IsEnabled = true
                 }
             };
 

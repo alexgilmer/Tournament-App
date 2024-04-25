@@ -4,6 +4,8 @@
 @using Tournament_App.Services;
 @inject IBanner BannerService
 
+@inject IFeatureControl FeatureControl
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,9 +36,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Instructions">Instructions</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AnswerBank">Answer Bank</a>
-                        </li>
+                        @if (FeatureControl.IsEnabled(Constants.FeatureAnswerBank))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AnswerBank">Answer Bank</a>
+                            </li>
+                        }
                         @if (SignInManager.IsSignedIn(User) && !User.IsInRole(Constants.AdminRole))
                         {
                             <li class="nav-item">

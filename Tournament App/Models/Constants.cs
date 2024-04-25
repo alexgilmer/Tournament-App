@@ -17,6 +17,7 @@
         public const string FeatureFlagCapture = "Flag Capture";
         public const string FeatureRegistration = "Registration";
         public const string FeaturePuzzlePages = "Puzzles";
+        public const string FeatureAnswerBank = "Answer Bank";
 
         public static string GetRarityColor(AnswerRarity answerRarity)
         {
