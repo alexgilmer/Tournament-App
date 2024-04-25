@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Tournament_App.Data;
 using Tournament_App.Models;
 using Tournament_App.Models.ViewModels.Home;
+using Tournament_App.Services;
 
 namespace Tournament_App.Controllers
 {
@@ -16,17 +17,20 @@ namespace Tournament_App.Controllers
         private readonly ApplicationDbContext Database;
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly SignInManager<ApplicationUser> SigninManager;
+        private readonly IFeatureControl FeatureControl;
 
         public HomeController(
             ILogger<HomeController> logger,
             ApplicationDbContext db,
             UserManager<ApplicationUser> um,
-            SignInManager<ApplicationUser> sm)
+            SignInManager<ApplicationUser> sm,
+            IFeatureControl fc)
         {
             _logger = logger;
             Database = db;
             UserManager = um;
             SigninManager = sm;
+            FeatureControl = fc;
         }
 
         public IActionResult Index()
@@ -119,18 +123,75 @@ namespace Tournament_App.Controllers
             return PartialView("_NeutralLeaderboardPartial", model);
         }
 
-        public IActionResult AnswerBank()
+        [HttpGet]
+        public IActionResult AnswerBank(AnswerBankViewModel? vm)
         {
-            List<AnswerPartialViewModel> result = Database.Answers
-                .ToList()
-                .Select(a => new AnswerPartialViewModel(
-                    a,
-                    displayImage: true,
-                    displayName: true)
-                )
-                .ToList();
+            if (!FeatureControl.IsEnabled(Constants.FeatureAnswerBank))
+            {
+                return Forbid();
+            }
 
-            return View(result);
+            if (vm == null || vm.AnswerGroups == null)
+            {
+                var groups = Database.Answers
+                    .ToList()
+                    .Select(a => new AnswerPartialViewModel(
+                        a,
+                        displayImage: true,
+                        displayName: true)
+                    )
+                    .GroupBy(apvm => "Results", apvm => apvm);
+
+                vm = new()
+                {
+                    AnswerGroups = groups
+                };
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult AnswerBank(AnswerBankFormModel fm)
+        {
+            IEnumerable<Answer> answers = Database.Answers;
+
+            if (fm.SearchText != string.Empty)
+            {
+                answers = answers.Where(a => a.Name.Contains(fm.SearchText));
+            }
+
+            switch (fm.SortBy)
+            {
+                case AnswerBankFormModel.AnswerBankSortBy.Name:
+                    answers = answers.OrderBy(a => a.Name);
+                    break;
+                case AnswerBankFormModel.AnswerBankSortBy.Points:
+                    answers = answers.OrderBy(a => a.PointValue);
+                    break;
+                case AnswerBankFormModel.AnswerBankSortBy.Rarity:
+                    answers = answers.OrderBy(a => (int)a.Rarity);
+                    break;
+            }
+
+            IEnumerable<IGrouping<string, AnswerPartialViewModel>> result;
+            if (fm.GroupByRarity)
+            {
+                result = answers.GroupBy(
+                    a => a.Rarity.ToString(),
+                    a => new AnswerPartialViewModel(a, displayImage: true, displayName: true)
+                    );
+            }
+            else
+            {
+                result = answers.GroupBy(
+                    a => "Result",
+                    a => new AnswerPartialViewModel(a, displayImage: true, displayName: true)
+                    );
+            }
+
+            AnswerBankViewModel vm = new() { AnswerGroups = result };
+            return AnswerBank(vm);
         }
 
         public PartialViewResult GetNotifications()

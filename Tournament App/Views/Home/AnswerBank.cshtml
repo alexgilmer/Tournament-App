@@ -1,6 +1,51 @@
-﻿@model IEnumerable<Tournament_App.Models.ViewModels.Home.AnswerPartialViewModel>
+﻿@using Tournament_App.Models.ViewModels.Home
+@model AnswerBankViewModel
 
 <h1>This is the answer bank!</h1>
-@foreach (var a in Model) {
-    <partial name="_AnswerPartial" model="@a" />
-}
+
+<form method="post" class="mb-3">
+    <div class="mb-3">
+        <label>
+            Search text (blank to show all)
+            <input type="text" name="SearchText" id="SearchText" placeholder="Flag name" />
+        </label>
+    </div>
+
+    <div class="mb-3">
+        <label>
+            Sort results by:
+            <select name="SortBy" asp-items="Html.GetEnumSelectList<AnswerBankFormModel.AnswerBankSortBy>()"></select>
+        </label>
+    </div>
+
+    <div class="mb-3">
+        <label>
+            <input type="checkbox" name="GroupByRarity" value="true" />
+            Group by rarity
+        </label>
+    </div>
+
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</form>
+
+<div class="accordion" id="accordionExample">
+    @foreach (var answerGroup in Model.AnswerGroups) {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@answerGroup.Key" aria-expanded="true" aria-controls="@answerGroup.Key">
+                    @answerGroup.Key
+                </button>
+            </h2>
+            <div id="@answerGroup.Key" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                <div class="accordion-body d-flex flex-row flex-wrap">
+                    @foreach (var answer in answerGroup)
+                    {
+                        <div class="m-1">
+                            <partial name="_AnswerPartial" model="answer"/>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
