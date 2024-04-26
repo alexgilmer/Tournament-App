@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tournament_App.Data;
@@ -11,9 +12,12 @@ namespace Tournament_App.Controllers
     public class AdminController : Controller
     {
         private ApplicationDbContext Database { get; }
-        public AdminController(ApplicationDbContext context)
+        private UserManager<ApplicationUser> UserManager { get; }
+
+        public AdminController(ApplicationDbContext context, UserManager<ApplicationUser> um)
         {
             Database = context;
+            UserManager = um;
         }
 
         public IActionResult Index()
@@ -148,6 +152,37 @@ namespace Tournament_App.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult CreateAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAdmin(string username, string password)
+        {
+            ApplicationUser newUser = new()
+            {
+                UserName = username
+            };
+
+            var result = await UserManager.CreateAsync(newUser, password);
+
+            if (!result.Succeeded)
+            {
+                return View();
+            }
+
+            result = await UserManager.AddToRoleAsync(newUser, Constants.AdminRole);
+
+            if (!result.Succeeded)
+            {
+                return View();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
