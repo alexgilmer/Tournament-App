@@ -175,12 +175,22 @@ namespace Tournament_App.Controllers
             }
 
             IEnumerable<IGrouping<string, AnswerPartialViewModel>> result;
+
+            
             if (fm.GroupByRarity)
             {
                 result = answers.GroupBy(
                     a => a.Rarity.ToString(),
                     a => new AnswerPartialViewModel(a, displayImage: true, displayName: true)
-                    );
+                    )
+                    .OrderBy(g =>
+                    {
+                        if (Enum.TryParse(g.Key, true, out AnswerRarity r))
+                        {
+                            return (int)r;
+                        }
+                        throw new Exception("Unable to group by rarity: " + g.Key);
+                    });
             }
             else
             {
