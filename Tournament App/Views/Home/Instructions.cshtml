@@ -21,7 +21,7 @@
             You can submit flags you've found on the tournament leaderboard page. <a asp-controller="Home" asp-action="Leaderboard">Leaderboard</a>
         </li>
         <li>
-            Flag strings come in two forms:
+            Flag strings come in three forms:
             <ul>
                 <li>
                     Some puzzles will tell you that a string is a flag. 
@@ -30,6 +30,15 @@
                 <li>
                     Any string you find that starts with "FLAG" in all-caps, followed by an underscore and some non-whitespace text.  For example:
                     <span style="font-family: monospace">FLAG_this_is_SPARTA</span>
+                </li>
+                <li>
+                    Some flags are automated! You don't need to find them. They will be automatically assigned to your team
+                    based on certain actions you take within the system. 
+                    <ul>
+                        <li>
+                            This year, these flags all pertain to the <em>hardening</em> of the "Thomas Anderson" PC. 
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </li>
@@ -46,7 +55,7 @@
                             Hint flags give your team a chance to spend some points for a hint to help solve a difficult puzzle. 
                         </li>
                         <li>
-                            "<span style="font-family: monospace">FLAG_{TEXT}</span>" flags are always safe (never negative points).
+                            "<span style="font-family: monospace">FLAG_{TEXT}</span>" flags that you find are always safe (never negative points).
                             These ones are like "treasure chests": gifts hidden in unusual spots to encourage exploration.
                         </li>
                     </ul>
@@ -74,7 +83,7 @@
         <li>Connecting to OVPN will place you into your own special VPN network (10.64.172.0/25).</li>
         <li>Your copy of the Hackathon network is the neighbouring /25 network.</li>
         <li>
-            Find "Thomas Anderson's PC" in the Hackathon network. 
+            Find the "Thomas Anderson" PC in the Hackathon network. 
             <ul>
                 <li>
                     This PC has 5 registered users.  5 different user names, one password. 
