@@ -13,6 +13,7 @@
         public const string AnswerMissingDescription = "ERROR: THIS FLAG IS MISSING A DESCRIPTION";
 
         public const string ImagePrefix = "/img/";
+        public const string BannerImagePrefix = ImagePrefix + "banner/";
 
         public const string FeatureFlagCapture = "Flag Capture";
         public const string FeatureRegistration = "Registration";

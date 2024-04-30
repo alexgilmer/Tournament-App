@@ -2,7 +2,7 @@
 {
     public class BannerPartialViewModel
     {
-        private const string Prefix = Constants.ImagePrefix + "banner/";
+        private const string Prefix = Constants.BannerImagePrefix;
         private Banner _Banner { get; }
 
         public bool HasLink
@@ -24,7 +24,7 @@
         {
             get
             {
-                if (_Banner.FileName.StartsWith("http"))
+                if (_Banner.FileName.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                     return _Banner.FileName;
 
                 return Prefix + _Banner.FileName;

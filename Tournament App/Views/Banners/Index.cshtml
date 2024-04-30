@@ -7,7 +7,7 @@
 
 @if(Model != null)
 {
-    <table class="table table-hover table-striped">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>
@@ -28,9 +28,9 @@
             @foreach (Banner b in Model)
             {
                 <tr>
-                    <td><a href="@b.Link">Link</a>: @b.Link</td>
+                    <td><a href="@b.Link">@b.Link</a></td>
                     <td>@b.FileName</td>
-                    <td><img src="~/img/banner/@b.FileName" /></td>
+                    <td><img src="@(Constants.BannerImagePrefix + b.FileName)" style="max-width: 700px;"/></td>
                     <td>
                         <a asp-controller="Banners" asp-action="Delete" asp-route-Id="@b.Id">Delete</a>
                     </td>
